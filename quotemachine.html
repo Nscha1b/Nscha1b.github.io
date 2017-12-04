@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Nick Schafer" content="Random Quote Generator">
+  <title>Random Quote Generator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+
+
+  <!--This is where JAVASCRIPT BEIGNS-->
+
+  <SCRIPT>
+
+  function setTweet(){
+    var text = "text=";
+    var quote = $("#quoteContent").text().toString();
+    var author = $("#authorContent").text().toString();
+    window.open('https://twitter.com/intent/tweet?'+ text + quote + "-" + author);
+  }
+
+  function getQuote(){
+    var $quote = $("#quoteContent");
+    var $author = $("#authorContent");
+    $.ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: 'https://talaikis.com/api/quotes/random/',
+      success: function(quote) {
+        $quote.append(quote.quote);
+        $author.append(quote.author);
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    getQuote();
+
+    $("#newQuote").on("click", function(){
+      $("#quoteContent").empty();
+      $("#authorContent").empty();
+      getQuote();
+    });
+
+    $("#newTweet").on("click", function(){
+      setTweet();
+
+    });
+
+
+  });
+
+
+
+  </SCRIPT>
+
+  <!--This is where CSS BEGIN-->
+  <style type="text/css">
+  body {
+    background-color: #c0deed;
+    margin: 2%;
+  }
+  h1{
+    overflow: hidden;
+    white-space: nowrap;
+    color: #0084b4;
+  }
+
+  .card {
+    padding: 20px;
+    width: 50%
+    float: center;
+  }
+  .text-small {
+    font-size: 12px;
+    color: #0084b4;
+  }
+  .fa-twitter{
+    color: white;
+  }
+
+  @media screen and (max-width: 480px) {
+    body {
+      margin: 2%;
+    }
+    h1{
+      font-size: 1.8em;
+    }
+    .card {
+      width: 100%;
+    }
+  }
+
+
+  </style>
+</head>
+
+<body>
+  <h1>Random Quote Generator</h1>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <p id="quoteContent" class="card-text font-italic blockquote"></p>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"><p id="authorContent" class="float-right blockquote-footer"></p></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><button type="button" id="newTweet" class="btn btn-sm btn-primary">Tweet Quote <i class="fa fa-twitter" aria-hidden="true"></i></button></div>
+        <div class="col-6"><button type="button" id="newQuote" class="float-right btn btn-sm btn-primary">New Quote <i class="fa fa-plus" aria-hidden="true"></i></button></div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+  <p class="text-small">Made by: Nick Schafer</p>
+</div>
+
+</body>
+
+</html>
