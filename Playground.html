@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Nick Schafer" content="Nick Schafer">
+  <title>Nick Schafer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+
+  <!--This is where JAVASCRIPT BEIGNS-->
+
+
+  <!--This is where CSS BEGIN-->
+  <style type="text/css">
+
+
+
+    body {
+    margin: 0;
+    padding: 0;
+    background-color:black;
+    position: fixed;
+  }
+  .outter{
+    position: absolute;
+    left: 46em;
+    top: 35em;
+    width: 300px;
+  }
+  .nameText {
+    position: absolute;
+    left: 3.8em;
+    top: 8em;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 60px;
+    color: #E6FB04;
+  }
+  .center {
+    position: fixed;
+    top: 2%;
+    left: 1%;
+    /*transform: translate(-50%,-50%);*/
+  }
+  .mobile {
+    width: 690px;
+    height: 820px;
+    background: #fff;
+    border-radius: 30px;
+    left: -22px;
+    border: 2px solid rgba(0,0,0,.3);
+    box-sizing: border-box;
+    box-shadow: inset 0 0 8px rgba(0,0,0,.3);
+  }
+  .screen {
+    position: relative;
+    background-color:black;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    overflow: hidden;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+  }
+  label{
+    font-size: 30px;
+  }
+  textarea {
+    height: 150px;
+    resize: none;
+  }
+  iframe {
+    width: 655px;
+    height: 700px;
+  }
+  .img-thumbnail{
+    width: 200px;
+    height: 200px;;
+  }
+  .projectScreen {
+    position: relative;
+    background-image: url("https://nscha1b.github.io/dust_scratches.png");
+    background-color: #edeeef;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    word-wrap: break-word;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+  }
+  ::-webkit-scrollbar {
+  display: none;
+  }
+  .contactScreen {
+    position: relative;
+    background-image: url("https://nscha1b.github.io/dust_scratches.png");
+    background-color: #edeeef;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    overflow: hidden;
+  }
+  .servScreen {
+    position: relative;
+    background-image: url("https://nscha1b.github.io/dust_scratches.png");
+    background-color: #edeeef;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    word-wrap: break-word;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+  }
+  .ameScreen {
+    position: relative;
+    background-image: url("https://nscha1b.github.io/dust_scratches.png");
+    background-color: #edeeef;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    overflow: hidden;
+  }
+  .lockScreen {
+    position: relative;
+    background-color: purple;
+    width: 655px;
+    height: 700px;
+    margin: 58px auto;
+    overflow: hidden;
+  }
+  .spacer {
+    padding-left: 90px
+  }
+
+  .appIcon {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .8);
+  }
+  .shifter {
+    position: relative;
+    top: 2.5em;
+    left: 2em;
+  }
+  .mainName {
+    position: relative;
+    top: 1.5em;
+    color: black;
+    font-weight: bold;
+  }
+  .mainTag {
+    position: relative;
+    font-size: 28px;
+    top: 3em;
+    color: black;
+  }
+  .right {
+    padding-left: 16em;
+  }
+  .txt-alt {
+    font-size: 20px;
+    color: grey;
+    font-weight: bold;
+  }
+  .appFake {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .8);
+  }
+  .appText {
+    padding-top: 20px;
+  }
+  .fbook {
+    background-color: #3b5999;
+  }
+  .igram {
+    background-color: #d6249f;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  }
+  .ame {
+    background-color: #60e24d;
+  }
+  .proj {
+    background-color: #c38b58;
+  }
+  .con {
+    background-color: #dd1b1b;
+  }
+  .ghub {
+    background-color: #6d1aad;
+  }
+  .fcamp {
+    background-color: #13741e;
+  }
+  .transColor {
+    position: relative;
+    bottom: -24.5em;
+    left: 3px;
+    background-color: white;
+    opacity: .2;
+    width: 650px;
+    height: 120px;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .8);
+  }
+  .messageBox {
+    position: relative;
+    top: -145px;
+    background-color: white;
+    opacity: .1;
+    width: 615px;
+    height: 260px;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .9);
+    border: solid;
+  }
+  .messageDarken {
+    position: relative;
+    bottom: 0;
+    left: 0px;
+    background-color: black;
+    opacity: .9;
+    width: 612px;
+    height: 80px;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .8);
+    border:solid;
+  }
+  .appIconSocial {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    bottom: -17em;
+    border-radius: 20%;
+    box-shadow: inset 0 0 8px rgba(0,0,0, .8);
+    position: relative;
+  }
+  .serv {
+    background-color: #717270;
+  }
+  .message {
+    background-color: #44c427;
+  }
+  .img-small {
+    width: 150px;
+    height: 150px;
+  }
+  .text-large{
+    font-family: 'Bungee', cursive;
+    font-size: 70px
+  }
+  .text-section {
+    font-family: 'Permanent Marker', cursive;
+  }
+  .other-text {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .moveBottom {
+    position: relative;
+    bottom: -10.0em;
+
+  }
+  ul{
+    list-style: none;
+  }
+  /*.screen:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,.1);
+    width: 100%;
+    height: 100%;
+    transform: skewX(-5deg) translateX(-50%);
+  }*/
+  .home {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #cecece;
+    box-sizing: border-box;
+    cursor: pointer;
+    box-shadow: inset 0 0 7px rgba(0,0,0,.1);
+  }
+  .inner {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: #262626;
+    box-sizing: border-box;
+  }
+  .inner:before {
+    content: '';
+    position: absolute;
+    left:-22px;
+    top: -2px;
+    background: #262626;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .inner:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    transform: translateX(-50%);
+    background: #262626;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .volume {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 90px;
+    left: -2px;
+  }
+  .volume li {
+    list-style: none;
+    width: 2px;
+    height: 30px;
+    background: #ccc;
+    margin: 10px 0;
+    border-top-Left-radius: 4px;
+    border-bottom-Left-radius: 4px;
+  }
+  .silent {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50px;
+    left: -2px;
+  }
+  .silent li {
+    list-style: none;
+    width: 2px;
+    height: 20px;
+    background: #ccc;
+    margin: 10px 0;
+    border-top-Left-radius: 4px;
+    border-bottom-Left-radius: 4px;
+  }
+  .sleep {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 90px;
+    right: -2px;
+    cursor: pointer;
+  }
+  .sleep li {
+    list-style: none;
+    width: 2px;
+    height: 50px;
+    background: #ccc;
+    margin: 10px 0;
+    border-top-Right-radius: 4px;
+    border-bottom-Right-radius: 4px;
+  }
+  .bigTime {
+    font-size: 65px;
+  }
+  #time1{
+    padding-left: 38px;
+  }
+
+
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Bungee|Cutive+Mono|VT323|Permanent+Marker" rel="stylesheet">
+
+  <div class="row">
+  <div class="center">
+    <div class="mobile">
+      <div class="lockScreen border border-dark">
+        <div class="container"><div class="row pt-3"><p class="text-white col-5"><i class="fa fa-signal"></i>  Tmobile  LTE</p><p class="col-5 text-white" id=""></p><p class="text-white col-2 text-center"><i class="fa fa-location-arrow"></i>   99%  <i class="fa fa-battery-full" aria-hidden="true"></i></p></div></div>
+        <div id="time" class="bigTime text-white text-center"></div>
+        <div class="container">
+          <div class="row shifter"><div class="appFake text-center pt-2 message"><i  class="fa fa-comment-o" style="font-size:30px;color:white;"></i></div><p class="txt-alt pl-2 pt-2">WEB DEVELOPER</p><p class="txt-alt pt-2 right">now</p></div>
+          <div class="col-12"><h1 class="mainName">Nick Schafer</h1></div>
+          <div class="col-12"><p class="mainTag">"Make websites look good again."</p></div>
+          <div class="messageBox rounded"><div class="messageDarken rounded">
+          </div ></div>
+          <div class="col-12"><p class="text-white text-center pt-5 mt-3">Press Home to open</p></div>
+        </div>
+      </div>
+      <div class="projectScreen border border-dark">
+        <div class="container pt-4">
+            <h5 class="pb-2 col-12 text-uppercase text-large text-center">Projects</h5>
+          <hr>
+            <h2 class="col-12 text-center text-section pt-3 pb-3">Random Quote Generator</h2>
+          <div class="row pb-4">
+          <p class="other-text col-7 pt-4">The quote generator project allows a user to click a button to generate a new quote. The quote is brought in from an outside API. The User can also click a button to tweet out the quote to the world.</p>
+            <div class="col-1"></div>
+            <img class="img-thumbnail" src="https://nscha1b.github.io/quotegen.jpg" alt="Thumbnail image">
+          </div>
+          <hr>
+            <h2 class="col-12 text-center text-section pt-3 pb-3">Random Quote Generator</h2>
+          <div class="row pb-4">
+          <p class="other-text col-7 pt-4">The quote generator project allows a user to click a button to generate a new quote. The quote is brought in from an outside API. The User can also click a button to tweet out the quote to the world.</p>
+            <div class="col-1"></div>
+            <img class="img-thumbnail" src="https://nscha1b.github.io/quotegen.jpg" alt="Thumbnail image">
+          </div>
+          <hr>
+            <h2 class="col-12 text-center text-section pt-3 pb-3">Random Quote Generator</h2>
+          <div class="row pb-4">
+          <p class="other-text col-7 pt-4">The quote generator project allows a user to click a button to generate a new quote. The quote is brought in from an outside API. The User can also click a button to tweet out the quote to the world.</p>
+            <div class="col-1"></div>
+            <img class="img-thumbnail" src="https://nscha1b.github.io/quotegen.jpg" alt="Thumbnail image">
+          </div>
+          <hr>
+            <h2 class="col-12 text-center text-section pt-3 pb-3">Random Quote Generator</h2>
+          <div class="row pb-4">
+          <p class="other-text col-7 pt-4">The quote generator project allows a user to click a button to generate a new quote. The quote is brought in from an outside API. The User can also click a button to tweet out the quote to the world.</p>
+            <div class="col-1"></div>
+            <img class="img-thumbnail" src="https://nscha1b.github.io/quotegen.jpg" alt="Thumbnail image">
+          </div>
+          <hr>
+
+        </div>
+      </div>
+      <div class="contactScreen border border-dark">
+        <div class="container pt-4">
+            <h5 class=" col-12 text-uppercase text-large text-center">Contact</h5>
+            <p class="other-text">Do you have questions? In need of a Developer? Just want to say hi? Please feel free to contact me at <a href="mailto:nps61992@gmail.com?Subject=Portfolio%20Inquire" target="_top">Nps61992@gmail.com</a> or feel free to use the form!</p>
+          <form>
+            <div class="form-group">
+              <label class="text-section text-center col-12" for='name'>Name:</label>
+              <input type="text" class="form-control col-12" id="name" placeholder="Name">
+              <label class="text-section text-center col-12" for='email'>Email:</label>
+              <input type="email" class="form-control col-12" id="email" placeholder="Email">
+              <label class="text-section text-center col-12" for='phone'>Phone:</label>
+              <input type="number" class="form-control col-12" id="phone" placeholder="Phone">
+              <label class="text-section text-center col-12" for='phone'>Message:</label>
+              <textarea type="text" class="form-control col-12" placeholder="Message" id="emailMessage"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="ameScreen border border-dark">
+        <div class="container">
+            <h5 class="text-uppercase text-large col-12 text-center">About</h5>
+          <h2 class="col-6 text-section pt-3">Front-End Developer</h2>
+          <p class="col-12 other-text">My name is Nick Schafer, and I create dynamic, and beautifully designed websites. I'm a developer, designer, and problem solver. Check out my projects to get a better idea of how I can help you.</p>
+          <h2 class="col-6 text-section pt-1">Knowledge</h2>
+          <ul class="other-text">
+            <li>html / css</li>
+            <li>Javascript / jQuery</li>
+            <li>AJAX</li>
+            <li>Bootstrap</li>
+            <li>github</li>
+            <li>Node.js</li>
+            <li>Wordpress</li>
+          </ul>
+        </div>
+      </div>
+      <div class="servScreen border border-dark">
+        <div class="container">
+            <h5 class="text-uppercase text-large col-12 text-center pt-2 pb-2">Services</h5>
+          <hr>
+          <h2 class="col-6 text-section pt-3">Website Design</h2>
+          <p class="col-12 other-text pb-3">All websites are beautifully designed to function across all browsers and devices. Responsive website's are a must!</p>
+          <hr>
+          <h2 class="col-6 text-section pt-3">SEO Optimization</h2>
+          <p class="col-12 other-text pb-3">Websites are optimized to rank higher in search engine results!</p>
+          <hr>
+          <h2 class="col-6 text-section pt-3">Graphic Design</h2>
+          <p class="col-12 other-text pb-3">Need a product designed? Tshirts, hats, bags? No problem.</p>
+          <hr>
+          <h2 class="col-6 text-section pt-3">Content Management Systems</h2>
+          <p class="col-12 other-text pb-3">Have the time to update your own content? Let us get your site up and running for you with an easy to use content management system. Training on how to edit your own content available.</p>
+          <hr>
+          <h2 class="col-6 text-section pt-3">Website Hosting</h2>
+          <p class="col-12 other-text pb-3">Need somewhere to keep your site on the web? Done!</p>
+        <hr>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="container"><div class="row pt-3"><p class="text-white col-5"><i class="fa fa-signal"></i>  Tmobile  LTE</p><p class="col-5 text-white" id="time1"></p><p class="text-white col-2 text-center"><i class="fa fa-location-arrow"></i>   99%  <i class="fa fa-battery-full" aria-hidden="true"></i></p></div></div>
+        <div class="container pt-5 pl-5">
+          <div class="row">
+          <div class="appIcon text-center pt-3 ame"><i  class="fa fa-male" style="font-size:50px;color:white"></i><p class="appText text-white">About Me</p>
+          </div>
+            <div class="spacer"></div>
+          <div class="appIcon text-center pt-3 proj"><i  class="fa fa-pencil-square-o" style="font-size:50px;color:white"></i>
+          <p class="appText text-white">Projects</p></div>
+
+            <div class="spacer"></div>
+          <div class="appIcon text-center pt-3 con"><i  class="fa fa-envelope-o" style="font-size:50px;color:white"></i>
+          <p class="appText text-white">Contact</p></div>
+
+            <div class="spacer"></div>
+          <div class="appIcon text-center pt-3 serv"><i  class="fa fa-cog" style="font-size:50px;color:white"></i>
+          <p class="appText text-white">Services</p></div>
+
+          </div>
+
+
+
+        </div>
+
+        <div class="transColor"></div>
+          <div class="container pt-4 pl-5">
+
+            <div class="row">
+              <div class="appIconSocial text-center pt-3 fbook"><a href="https://www.facebook.com/nickPschafer" target="_blank"><i  class="fa fa-facebook" style="font-size:50px;color:white"></i></a></div>
+              <div class="spacer"></div>
+              <div class="appIconSocial text-center pt-3 igram"><a href="https://www.instagram.com/_nickschafer/" target="_blank"><i  class="fa fa-instagram" style="font-size:50px;color:white"></i></a></div>
+              <div class="spacer"></div>
+              <div class="appIconSocial text-center pt-3 ghub"><a href="https://github.com/Nscha1b" target="_blank"><i  class="fa fa-github" style="font-size:50px;color:white"></i></a></div>
+              <div class="spacer"></div>
+              <div class="appIconSocial text-center pt-3 fcamp"><a href="https://www.freecodecamp.org/nps61992" target="_blank"><i  class="fa fa-free-code-camp" style="font-size:50px;color:white"></i></a></div>
+          </div>
+           </div>
+
+
+
+
+      </div>
+      <div class="home"></div>
+      <div class="inner"></div>
+      <ul class="volume">
+        <li></li>
+        <li></li>
+      </ul>
+      <ul class="silent">
+        <li></li>
+      </ul>
+      <ul class="sleep">
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
+
+    <!--is this working
+    <p class="outter text-white"></p>
+    <h1 class="text-center nameText">Nick Schafer_</h1>
+  -->
+
+                       </div>
+
+          </body>
+
+          <SCRIPT>
+
+          $(document).ready(function() {
+            $( ".lockScreen" ).show();
+            $( ".contactScreen" ).hide();
+            $( ".ameScreen" ).hide();
+            $( ".fbookScreen" ).hide();
+            $( ".projectScreen" ).hide();
+            $( ".outter" ).hide();
+            $( ".screen" ).hide();
+            $( ".servScreen" ).hide();
+
+
+            $("#time").html(time);
+            $("#time1").html(time);
+
+
+
+          });
+
+           $(".appIcon").on("click", function(event){
+              $( ".screen" ).hide();
+            });
+
+          $(".serv").on("click", function(event){
+              $( ".servScreen" ).show();
+            });
+
+           $(".ame").on("click", function(event){
+              $( ".ameScreen" ).show();
+            });
+
+           $(".fbook").on("click", function(event) {
+             $( ".fbookScreen" ).show();
+             $( ".outter" ).html("<h2 class='text-white text-center text-section'>Random Quote Generator</h2><p class='other-text text-white'>The quote generator project allows a user to click a button to generate a new quote. The quote is brought in from an outside API. The User can also click a button to tweet out the quote to the world.</p>");
+             $( ".outter" ).show();
+           });
+
+          $(".con").on("click", function(event) {
+             $( ".contactScreen" ).show();
+           });
+
+          $(".proj").on("click", function(event) {
+             $( ".projectScreen" ).show();
+           });
+
+          $(".sleep").on("click", function(event) {
+            $( ".contactScreen" ).hide();
+            $( ".fbookScreen" ).hide();
+            $(".ameScreen").hide();
+            $(".projectScreen").hide();
+            $(".outter").val("");
+            $( ".outter" ).hide();
+            $(".screen").hide();
+            $(".servScreen").hide();
+            $( ".lockScreen" ).show();
+           });
+
+
+          $(".home").on("click", function() {
+            $( ".lockScreen" ).hide();
+            $( ".contactScreen" ).hide();
+            $( ".fbookScreen" ).hide();
+            $(".ameScreen").hide();
+            $(".projectScreen").hide();
+            $(".outter").val("");
+            $( ".outter" ).hide();
+            $(".servScreen").hide();
+            $(".screen").show();
+          });
+
+
+          function time() {
+              var today = new Date();
+              var h = today.getHours();
+              var m = today.getMinutes();
+              var s = today.getSeconds();
+              m = checkTime(m);
+              s = checkTime(s);
+              document.getElementById('time').innerHTML =
+              h + ":" + m;
+            document.getElementById('time1').innerHTML =
+              h + ":" + m;
+              var t = setTimeout(startTime, 500);
+          }
+          function checkTime(i) {
+              if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+              return i;
+          }
+
+
+
+
+          </SCRIPT>
+
+
+          </html>
