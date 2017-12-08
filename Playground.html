@@ -21,9 +21,29 @@
 
 
     body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     margin: 0;
     padding: 0;
     background-color:black;
+  }
+  .lockScreen {
+    position: relative;
+    background-color: purple;
+    width: 600px;
+    height: 500px;
+    margin: 58px auto;
+    overflow: hidden;
+
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
   }
   .outter{
     position: absolute;
@@ -47,7 +67,7 @@
   }
   .mobile {
     position: absolute;
-    width: 100%;
+    width: 500px;
     height: 100%;
     background: #fff;
     border-radius: 30px;
@@ -128,14 +148,7 @@
     margin: 58px auto;
     overflow: hidden;
   }
-  .lockScreen {
-    position: relative;
-    background-color: purple;
-    width: 95%;
-    height: 87%;
-    margin: 58px auto;
-    overflow: hidden;
-  }
+
   .spacer {
     padding-left: 90px
   }
