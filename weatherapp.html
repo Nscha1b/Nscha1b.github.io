@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Nick Schafer" content="Nick Schafer">
+  <title>Nick Schafer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+
+
+  <!--This is where JAVASCRIPT BEIGNS-->
+
+  <SCRIPT>
+  $(document).ready(function() {
+    $(".border-custom").hide();
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+
+        var currentdate = new Date();
+        var datetime = currentdate.getHours();
+        console.log(datetime);
+        if (currentdate.getHours() < 7 || currentdate.getHours() > 28) {
+          $("body").css("background", "rgb(125,126,125)");
+          $("body").css("background", "-moz-linear-gradient(-45deg, rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%");
+          $("body").css("background", "-webkit-linear-gradient(-45deg, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%");
+          $("body").css("background", "linear-gradient(135deg, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%)");
+          $("body").append("<div class='moon'></div>");
+        }
+        else {
+          $("body").css("background", "-moz-linear-gradient(-45deg, #1e5799 0%, #2989d8 35%, #207cca 60%, #7db9e8 100%)");
+          $("body").css("background", "-moz-linear-gradient(-45deg, #1e5799 0%, #2989d8 35%, #207cca 60%, #7db9e8 100%)");
+          $("body").css("background", "-webkit-linear-gradient(-45deg, #1e5799 0%,#2989d8 35%,#207cca 60%,#7db9e8 100%");
+          $("body").css("background", "linear-gradient(135deg, #1e5799 0%,#2989d8 35%,#207cca 60%,#7db9e8 100%");
+          $("body").append("<div class='sun'></div>");
+        }
+
+
+        $.ajax({
+          type: 'GET',
+          url:"https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude + "",
+          success: function(result){
+            var temp = Math.round(result.main.temp);
+            var high = Math.round(result.main.temp_max);
+            var min = Math.round(result.main.temp_min);
+
+            $("#location").html(result.name + ", " + result.sys.country);
+            $("#conditions").html(result.weather[0].main);
+            $("#temp").html(convertC(temp) + "°");
+            $("#high").html(convertC(high) +" High");
+            $("#low").html(convertC(min) + " Low");
+            $(".hidden").show();
+
+            if ($("#conditions").html() == "Snow") {
+              $(".logoImg").append("<h4 class='icon' data-icon='W'></h4>");
+              $("body").append("<div class='snow1'></div> <div class='snow2'></div> <div class='snow3'></div>");
+              $(".border-custom").show();
+            }
+            else if ($("#conditions").html() == "Thunderstom") {
+              $(".logoImg").append("<h4 class='icon' data-icon='0'></h4>");
+              $("body").append("<div class='rain1'></div> <div class='rain2'></div> <div class='rain3'></div>");
+              $(".border-custom").show();
+            }
+            else if ($("#conditions").html() == "Drizzle") {
+              $(".logoImg").append("<h4 class='icon' data-icon='Q'></h4>");
+              $("body").append("<div class='rain1'></div> <div class='rain2'></div> <div class='rain3'></div>");
+              $(".border-custom").show();
+            }
+            else if ($("#conditions").html() == "Clouds") {
+              $(".logoImg").append("<h4 class='icon' data-icon='N'></h4>");
+              $(".border-custom").show();
+            }
+            else if ($("#conditions").html() == "Rain") {
+              $(".logoImg").append("<h4 class='icon' data-icon='R'></h4>");
+              $("body").append("<div class='rain1'></div> <div class='rain2'></div> <div class='rain3'></div>");
+              $(".border-custom").show();
+            }
+            else if ($("#conditions").html() == "Clear") {
+              $(".logoImg").append("<h4 class='icon' data-icon='B'></h4>");
+              $(".border-custom").show();
+            }
+
+
+
+
+            $("#convertButton").on("click", function() {
+              var conValue = document.getElementById('convertButton').innerHTML;
+              console.log(conValue);
+              if (conValue == "F") {
+                $("#temp").html(temp + "°");
+                $("#high").html(high + " High");
+                $("#low").html(min + " Low");
+                $("#convertButton").html("C");
+              }
+              else if(conValue == "C"){
+                $("#temp").html(convertC(temp) + "°");
+                $("#high").html(convertC(high) + " High");
+                $("#low").html(convertC(min)  + " Low");
+                $("#convertButton").html("F");
+              }
+
+            });
+
+          }
+        });
+
+
+
+      });
+    }
+
+  });
+
+  function convertC(num) {
+    return Math.round(num * 1.8 + 32);
+  }
+
+
+
+
+
+
+
+
+
+
+  </SCRIPT>
+
+  <!--This is where CSS BEGIN-->
+  <style type="text/css">
+  html{
+    min-height: 100%;
+    position:relative;
+  }
+  body{
+    padding-top: 2%;
+    height: 100%;
+    width: 100%;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  }
+  .container-fluid{
+    height: 100%
+    width:auto;
+  }
+  h4 {
+    font-size: 3.5em;
+    text-decoration: none;
+  }
+
+  .hidden{
+    display: none;
+  }
+  .logoImg{
+    font-size: 4.5em;
+  }
+  #location{
+    font-size: 2.2em;
+  }
+  #conditions{
+    font-size: 2.4em;
+  }
+  #high{
+    font-size: 1.7em;
+  }
+  #low{
+    font-size: 1.7em;
+  }
+
+  .icon:before {
+    font-family: 'MeteoconsRegular';
+    content: attr(data-icon);
+    src: url("/meteocons-webfont.ttf")
+  }
+
+  @font-face {
+    font-family: 'MeteoconsRegular';
+    src: url('meteocons-webfont.eot');
+    src: url('meteocons-webfont.eot?#iefix') format('embedded-opentype'),
+    url('meteocons-webfont.ttf') format('truetype'),
+    url('meteocons-webfont.svg#MeteoconsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  #convertButton{
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+  }
+
+.border-custom {
+  border: solid 2px;
+  border-radius: 12px;
+  color: white;
+
+}
+.snow1{
+  background: url(snow.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateOne 10s infinite linear;
+  filter: blur(1px);
+  z-index: 1;
+}
+@keyframes animateOne{
+  0%{
+    background-position: 0px 0px
+  }
+  100%{
+    background-position: 100px 650px
+  }
+}
+.snow2{
+  background: url(snow.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateTwo 10s infinite linear;
+  background-size: 300px;
+  filter: blur(1px);
+  z-index: 1;
+}
+@keyframes animateTwo{
+  0%{
+    background-position: 0px -100px
+  }
+  100%{
+    background-position: 0px 650px
+  }
+}
+.snow3{
+  background: url(snow.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateThree 10s infinite linear;
+  background-size: 800px;
+  filter: blur(2px);
+  z-index: 1;
+}
+@keyframes animateThree{
+  0%{
+    background-position: 0px 100px
+  }
+  100%{
+    background-position: 300px 650px
+  }
+}
+
+
+.rain1{
+  background: url(rain.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateRainOne 10s infinite linear;
+  filter: blur(1px);
+  background-size: 150px;
+  z-index: 1;
+}
+@keyframes animateRainOne{
+  0%{
+    background-position: 0px 0px
+  }
+  100%{
+    background-position: 0px 2000px
+  }
+}
+.rain2{
+  background: url(rain.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateRainTwo 4s infinite linear;
+  background-size: 300px;
+  filter: blur(1px);
+  z-index: 1;
+}
+@keyframes animateRainTwo{
+  0%{
+    background-position: 0px -100px
+  }
+  100%{
+    background-position: 0px 2000px
+  }
+}
+.rain3{
+  background: url(rain.png);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: animateRainThree 2s infinite linear;
+  background-size: 800px;
+  filter: blur(2px);
+  z-index: 1;
+}
+@keyframes animateRainThree{
+  0%{
+    background-position: 0px 100px
+  }
+  100%{
+    background-position: 12px 2000px
+  }
+}
+
+.sun{
+  background: url(sun.png);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  z-index: 1;
+}
+.moon{
+  background: url(moon.png);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  z-index: 1;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="border-custom">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 text-center pt-4 pb-4 text-white"><h4 class="d-inline" id="location"></h4></div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 text-center text-white"><div class="logoImg"></div></div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 text-center pb-2 text-white"><h4 id="conditions"></h4></div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-right hidden text-white pl-5"><h4 class="d-inline" id="temp"></h4><h4 class="d-inline" href='#' id='convertButton'>F</h4></div>
+      <div class="col-4"></div>
+      <div class="col-4 text-white">
+        <h4 id="high" class="d-inline pr-5"></h4>
+        <h4 id="low" class="pb-3 pr-5"></h4>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
