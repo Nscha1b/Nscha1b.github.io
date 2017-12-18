@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Nick Schafer" content="Nick Schafer">
+  <title>Nick Schafer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+
+
+  <!--This is where JAVASCRIPT BEIGNS-->
+
+
+
+  <!--This is where CSS BEGIN-->
+  <style type="text/css">
+
+  body {
+    padding-top: 10px;
+    background-image: url(globe.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #0375b4;
+  }
+
+  .container {
+    overflow: auto;
+  }
+
+
+  .fa-search {
+    color: #FFF55C;
+  }
+
+  #searchBox {
+    height: 3em;
+    color: black;
+    border: solid black;
+    border-width: 2px;
+    border-radius: 50px;
+    outline: none;
+    background-color: #d9d9d9;
+    text-indent: 10px;
+  }
+
+  a, a:hover {
+    color: black;
+    text-decoration: none
+  }
+
+  .results {
+    background-color: #d9d9d9;
+    text-decoration: none;
+    padding:1%;
+  }
+
+  .results:hover {
+    border: solid #FFF55C;
+    border-width: 7px;
+    text-decoration: none;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+
+  }
+
+  li {
+    padding: .3em;
+    list-style: none;
+  }
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <div class="parallax"></div>
+  <div class="container">
+    <div class="pl-2 row">
+      <div class="col-lg-1 col-md-2 col-sm-2">
+        <h1 class="display-2 d-none d-sm-block"><i class="fa fa-search" class="" aria-hidden="true"></i></h1>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-1">
+        <form class="pt-2 pl-2" action="javascript:void(0);">
+            <p class="col-lg-7 col-md-5  float float-left d-none d-md-block" style="font-weight: bold;">Wikipedia Viewer</p>
+            <a class="col-lg-5 col-md-7 float float-right pr-4 pb-2" style="color: #f19f4d;" href="https://en.wikipedia.org/wiki/Special:Random">Click here for a random article</a>
+
+
+          <input type="text" class="form-control form-control-lg" id="searchBox" placeholder="What do you want to know?">
+
+        </form>
+      </div>
+    </div>
+
+
+    <button type="button" style="display: none;" class="btn btn-primary" id="searchButton">Search</button>
+
+    <div class="row pt-3">
+
+      <div class="col-lg-10 col-md-11 col-sm-11 ">
+        <ul class="pl-3" id="resultData"></ul>
+    </div>
+    </div>
+  </div>
+
+</body>
+
+<SCRIPT>
+$("document").ready(function() {
+  $("#searchButton").hide();
+  $("#searchButton").on("click", function() {
+    $("#resultData").html("");
+    $.get(wikiLinkBuilder($("#searchBox").val()), function(data) {
+      jQuery.each(data.query.search, function(i) {
+        var link = createUrl(data.query.search[i].pageid);
+        $("#resultData").append(
+          "<li><a href='" +
+          link +
+          "'><div class='results'>" +
+          "<h4>" +
+          data.query.search[i].title +
+          "</h4>" +
+          "<p>" +
+          data.query.search[i].snippet +
+          "</p>" +
+          "</div></li></a>"
+        );
+
+        i++;
+      });
+
+      console.log(data);
+    }); //end get Request
+  }); //end search button click
+
+
+
+  $("#searchBox").keyup(function(event) {
+    if (event.keyCode === 13) {
+      $("#searchButton").click();
+    }
+  });
+
+
+
+});
+
+//build the link for query
+function wikiLinkBuilder(searchTerm) {
+  var replaceSpace = searchTerm.replace(/ /g, "%20");
+  var link =
+  "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=&list=search&indexpageids=1&iwurl=1&titles=&srsearch=" +
+  replaceSpace +
+  "&srprop=snippet";
+  return link;
+}
+
+function createUrl(pageID) {
+  link = "https://en.wikipedia.org/?curid=" + pageID + "";
+  return link;
+}
+
+
+
+</SCRIPT>
+
+</html>
