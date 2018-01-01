@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bevan|Open+Sans" rel="stylesheet">
+</head>
+<style>
+body{
+  padding-top: 2em;
+  background-color: #777b82;
+}
+.calcBody{
+  background-color: #2e2f30;
+  height: calc(31vw + 31vh);
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: calc(27vw + 27vh);
+  border-radius: 15px;
+  box-shadow: 5px 5px 7px black;
+}
+.light{
+  height: calc(2vw + 2vh);
+  width: calc(6vw + 6vh);
+  background-color: #aab5a8;
+  position: absolute;
+  right: calc(1vw + 1vh);
+  top: calc(1vw + 1vh);
+  border:solid 4px;
+}
+.screen{
+  height: calc(6vw + 6vh);
+  width: calc(25vw + 25vh);
+  background-color: #aab5a8;
+  position: absolute;
+  right: calc(1vw + 1vh);
+  top: calc(4vw + 4vh);
+  border:solid 4px;
+}
+.button{
+  background-color: #605d5b;
+  height: calc(2.5vw + 2.5vh);
+  width: calc(4vw + 4vh);
+  position: absolute;
+  border: solid black 1px;
+  box-shadow: 0 5px #333333;
+  line-height: calc(2.5vw + 2.5vh);
+  color:white;
+}
+.button:active {
+  box-shadow: 0 2px #262626;
+  transform: translateY(4px);
+}
+#on{
+  background-color: #d62c2c;
+  right: calc(22vw + 22vh);
+  top: calc(11vw + 11vh);
+  color:black;
+}
+#seven{
+  right: calc(22vw + 22vh);
+  top: calc(15vw + 15vh);
+}
+#eight{
+  right: calc(17vw + 17vh);
+  top: calc(15vw + 15vh);
+}
+#nine{
+  right: calc(12vw + 12vh);
+  top: calc(15vw + 15vh);
+}
+#sqrt{
+  right: calc(7vw + 7vh);
+  top: calc(15vw + 15vh);
+}
+#clear{
+  right: calc(2vw + 2vh);
+  top: calc(15vw + 15vh);
+}
+#four{
+  right: calc(22vw + 22vh);
+  top: calc(19vw + 19vh);
+}
+#five{
+  right: calc(17vw + 17vh);
+  top: calc(19vw + 19vh);
+}
+#six{
+  right: calc(12vw + 12vh);
+  top: calc(19vw + 19vh);
+}
+#mult{
+  right: calc(7vw + 7vh);
+  top: calc(19vw + 19vh);
+}
+#one{
+  right: calc(22vw + 22vh);
+  top: calc(23vw + 23vh);
+}
+#two{
+  right: calc(17vw + 17vh);
+  top: calc(23vw + 23vh);
+}
+#three{
+  right: calc(12vw + 12vh);
+  top: calc(23vw + 23vh);
+}
+#plus{
+  right: calc(7vw + 7vh);
+  top: calc(23vw + 23vh);
+  height: calc(6.5vw + 6.5vh);
+  line-height: calc(6.5vw + 6.5vh);
+}
+#zero{
+  right: calc(22vw + 22vh);
+  top: calc(27vw + 27vh);
+}
+#dot{
+  right: calc(17vw + 17vh);
+  top: calc(27vw + 27vh);
+}
+#neg{
+  right: calc(12vw + 12vh);
+  top: calc(27vw + 27vh);
+}
+#div{
+  right: calc(2vw + 2vh);
+  top: calc(19vw + 19vh);
+}
+#min{
+  right: calc(2vw + 2vh);
+  top: calc(23vw + 23vh);
+}
+#equal{
+  right: calc(2vw + 2vh);
+  top: calc(27vw + 27vh);
+}
+.numInput{
+  font-size: calc(4vw + 4vh);
+}
+#label{
+  color: white;
+  position: absolute;
+  font-size: calc(1.5vw + 1.5vh);
+  right: calc(18vw + 18vh);
+  top: calc(1vw + 1vh);
+
+}
+
+
+
+
+</style>
+<body>
+  <div class="container">
+
+    <div class="col-xs-1 calcBody">
+      <div id="label">Calculator_</div>
+      <div class="light"></div>
+      <div class="screen text-center"><p class="numInput"></p></div>
+      <div class="row">
+        <div class="button text-center" id="on">ON/C</div>
+        <div class="button text-center" id="clear">CE</div>
+      </div>
+      <div class="row">
+        <div class="button text-center" id="seven">7</div>
+        <div class="button text-center" id="eight">8</div>
+        <div class="button text-center" id="nine">9</div>
+        <div class="button text-center" id="sqrt">√</div>
+      </div>
+      <div class="row">
+        <div class="button text-center" id="four">4</div>
+        <div class="button text-center" id="five">5</div>
+        <div class="button text-center" id="six">6</div>
+        <div class="button text-center" id="mult">X</div>
+        <div class="button text-center" id="div">/</div>
+      </div>
+      <div class="row">
+        <div class="button text-center" id="one">1</div>
+        <div class="button text-center" id="two">2</div>
+        <div class="button text-center" id="three">3</div>
+        <div class="button text-center" id="plus">+</div>
+        <div class="button text-center" id="min">-</div>
+      </div>
+      <div class="row">
+        <div class="button text-center" id="zero">0</div>
+        <div class="button text-center" id="dot">.</div>
+        <div class="button text-center" id="neg">+/-</div>
+        <div class="button text-center" id="equal">=</div>
+      </div>
+      
+    </div>
+  </div>
+  <script>
+    $( document ).ready(function() {
+      var total = 0;
+      var action;
+      var neg = $("p").text();
+
+      $( ".button" ).each(function(index) {
+        $(this).on("click", function(){
+          var key = $(this).html();
+          $('p').html(truncateText('p', 7));
+
+          switch(key) {
+
+            case "+/-":
+              if(neg.charAt(0) == "-"){
+                $("p").text( $("p").text().replace('-', '') );
+              } else {
+                $("p").prepend("-");
+              }
+            break;
+
+            case "√":
+              total += Math.sqrt(parseFloat($("p").html()));
+              $("p").html(Math.round(total));
+              total = 0;
+            break;
+
+            case "+":
+              total += parseFloat($("p").html());
+              $("p").html("");
+              action = key;
+            break;
+
+            case "-":
+              if(total == 0){
+                total = parseFloat($("p").html());
+              } else{
+                total -= parseFloat($("p").html());
+              }
+              $("p").html("");
+              action = key;
+            break;
+
+            case "X":
+              if(total == 0){
+                total = parseFloat($("p").html());
+              } else{
+                total *= parseFloat($("p").html());
+              }
+              $("p").html("");
+              action = key;
+            break;
+
+            case "/":
+              if(total == 0){
+                total = parseFloat($("p").html());
+              } else{
+                total /= parseFloat($("p").html());
+              }
+              $("p").html("");
+              action = key;
+            break;
+
+            case "=":
+              if(action == "+") {
+                total += parseFloat($("p").html());
+                
+              } else if(action == "-") {
+                total -= parseFloat($("p").html());
+              } else if(action == "X") {
+                total *= parseFloat($("p").html());
+              } else if(action == "/") {
+                total /= parseFloat($("p").html());
+              }
+              $("p").html(total);
+              total = 0;
+            break;
+
+            case "CE":
+              total = 0;
+              $("p").html("");
+              $("p").html("");
+              action = key;
+            break;
+
+            case "ON/C":
+              total = 0;
+              $("p").html("");
+              $("p").html("");
+              action = key;
+            break;
+            
+            default:
+            $("p").append(key);
+          }
+
+        });
+
+      });
+
+      function truncateText(selector, maxLength) {
+        var element = document.querySelector(selector),
+        truncated = element.innerText;
+
+        if (truncated.length > maxLength) {
+          truncated = ""
+        }
+        return truncated;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+  </script>
+
+
+</body>
+
+</html>
