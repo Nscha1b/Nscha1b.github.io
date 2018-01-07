@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/242245a4a1.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Mr+Dafoe|Oswald" rel="stylesheet">
+</head>
+<style>
+body{
+  background-color: #dddbc7;
+}
+.circle {
+  width: 40vw;
+  height: 0;
+  margin-left: 0;
+  border: .5vw solid #dddbc7;
+  padding: 20vw 0;
+  margin: 1em auto;
+  border-radius: 50%;
+  color: #fff;
+  background-color: green;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 0 .7vw  #302c2d;
+  cursor: pointer;
+}
+
+.fillCircle {
+ background: linear-gradient(#0d930d 100%, #622569 0%);
+}
+
+.timer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.timer:before {
+  content: '';
+  vertical-align: middle;
+  display: inline-block;
+  width: 0;
+  height: 100%;
+}
+
+.timer span {
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 2em;
+  font-size: 6.5vw;
+}
+
+h1 {
+  font-family: 'Mr Dafoe', cursive;
+  font-size: 7em;
+  font-size: 11vw;
+}
+
+.length {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4em;
+  font-size: 7vw;
+}
+
+.fa {
+  font-size: 5vw;
+  padding: 1vw;
+  cursor: pointer;
+}
+
+@media only screen and (min-width : 1200px) {
+  h1{
+    font-size: 120px;
+  }
+  .circle {
+    width: 500px;
+    border: .5vw solid #dddbc7;
+    padding: 250px 0;
+    box-shadow: 0 0 0 10px  #302c2d;
+  }
+  h2{
+    font-size: .2em;
+  }
+  .length{
+    font-size: 5em;
+  }
+  .fa{
+    font-size: .8em;
+  }
+
+
+}
+
+
+</style>
+<body>
+
+
+  <div class="container">
+    <h1 class="col-xs-12 text-center">Pomodoro Timer</h1>
+
+    <div class="col-xs-12 circle fillCircle">
+      <div class="row">
+        <div class="timer">
+          <span class="session" id="sessionTimerMin">1</span>
+          <span>:</span>
+          <span class="session" id="sessionTimerSec">00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <h2 class="col-4 text-center pl-4 length ">Session<br>
+        <span class=""><span id="sessionDown"><i class="fa fa-minus" aria-hidden="true"></i>
+        </span><span id="sessionTime">1</span><span id="sessionUp"><i class="fa fa-plus" aria-hidden="true"></i></span></span>
+      </h2>
+      <h2 class="col-4"></h2>
+      <h2 class="col-4 length">Break<br>
+        <span id="breakDown"><i class="fa fa-minus" aria-hidden="true"></i>
+        </span><span id="breakTime">1</span><span id="breakUp"><i class="fa fa-plus" aria-hidden="true"></i></span>
+      </h2>
+    </div>
+
+  </div>
+  <script>
+    $( document ).ready(function() {
+
+      var startColor = 100;
+      var fillAmount = $("#sessionTime").text() * 60;
+      var changeAmount = 100 / fillAmount;
+      var pause = true;
+      var sessionDown = $('#sessionDown');
+      var sessionUp = $('#sessionUp');
+      var breakDown = $('#breakDown');
+      var breakUp = $('#breakUp');
+
+
+      //up and down buttons for break and session time
+      sessionDown.on("click", function(){return down($('#sessionTime'),$("#sessionTimerMin"),$("#sessionTimerSec"),$("#sessionTimerMin").html(),$("#sessionTimerSec").html())});
+      sessionUp.on("click", function(){return up($('#sessionTime'),$("#sessionTimerMin"),$("#sessionTimerSec"),$("#sessionTimerMin").html(),$("#sessionTimerSec").html())});
+      breakDown.on("click", function(){return down($('#breakTime'),$("#breakTimerMin"),$("#breakTimerSec"),$("#breakTimerMin").html(),$("#breakTimerSec").html())});
+      breakUp.on("click", function(){return up($('#breakTime'),$("#breakTimerMin"),$("#breakTimerSec"),$("#breakTimerMin").html(),$("#breakTimerSec").html())});
+
+
+      function down(timeID, minID, secID, min, sec){
+        var minus = parseInt(timeID.text());
+        if (minus > 1) {
+          minus -= 1;
+          timeID.html(minus);
+          minID.html(timeID.text());
+          sec = 0;
+          min = timeID.text();
+          secID.html(sec + "0");
+          resetColor();
+        }
+      }
+
+      function up(timeID, minID, secID, min, sec){
+        var plus = parseInt(timeID.text());
+        if (plus < 25) {
+          plus += 1;
+          timeID.html(plus);
+          minID.html(timeID.text());
+          sec = 0;
+          min = timeID.text();
+          secID.html(sec + "0");
+          resetColor();
+        }
+      }
+
+
+
+      $(".circle").on("click", function() {
+        if (pause == true) {
+          pause = false;
+          timer($("#sessionTimerMin"),$("#sessionTimerSec"),$("#sessionTimerMin").html(),$("#sessionTimerSec").html());
+        } else {
+          pause = true;
+
+        }
+      });
+
+
+      function timer(minID, secID, min, sec){
+        var sessionTime = $("#sessionTime").html();
+        var breakTime = $("#breakTime").html();
+        var current = "session";
+        var start = setInterval(function() {
+          if (pause == true) {
+            clearInterval( start );
+          } else {
+            if (sec == 0) {
+              min--;
+              minID.html(min);
+              sec = 59;
+              secID.html(sec);
+              changeColor(current);
+            } else {
+              sec--;
+              if (sec < 10) {
+                secID.html("0" + sec);
+              } else {
+                secID.html(sec);
+              }
+              if (sec == 0 && min == 0) {
+                var audio = new Audio('bell.mp3');
+                audio.play();
+                current = swap(current);
+                if (current == "session") {
+                  min = sessionTime;
+                  sec = 0;
+                  minID.html(min);
+                  secID.html("0" + sec);
+                } else{
+                  min = breakTime;
+                  sec = 0;
+                  minID.html(min);
+                  secID.html("0" + sec);
+                }
+                resetColor();
+                changeColor(current);
+              }
+
+              changeColor(current);
+            }
+          }
+        }, 1000);
+      }
+
+
+      function swap(word){
+        if (word == "session") {
+          return "break";
+        } else {
+          return "session";
+        }
+      }
+
+
+      function changeColor(word) {
+        var sessionCol = "#db1111";
+        var breakCol = "#0d930d";
+        if (word == "session") {
+          sessionCol = "#db1111";
+          breakCol = "#0d930d";
+        } else {
+          sessionCol = "#0d930d";
+          breakCol = "#db1111";
+        }
+        startColor -= changeAmount;
+        $(".fillCircle").css({
+          background: "linear-gradient" + "(" + breakCol + " " + startColor + "%," + sessionCol +" 0%)"
+        });
+      }
+
+      function resetColor() {
+        fillAmount = $("#sessionTimerMin").text() * 60;
+        changeAmount = 100 / fillAmount;
+        startColor = 100;
+        changeColor(current);
+      }
+
+    });
+  </script>
+
+
+</body>
+
+</html>
