@@ -38,9 +38,12 @@
 	}
 
 	.fa-bars{
-		font-size: 30px;
+		position: fixed;
+		top: 0;
 		padding-top: 20px;
-		z-index: 50;
+		padding-right: 20px;
+		right: 0;
+		font-size: 30px;
 	}
 
 	#profile-pic{
@@ -101,7 +104,7 @@
 	}
 
 	.menu{
-		background-image: url("dust_scratches.png");
+
 		position: fixed;
 		width: 100%;
 		top: 0;
@@ -116,10 +119,11 @@
 	}
 
 	.menu-active {
-		background-image: url("dust_scratches.png");
+		background-color: red;
 		position: fixed;
 		width: 100%;
 		top: 0;
+		left: 0;
 		bottom: 0;
 		transform: translate3d(0,0,0);
 		z-index: 10;
@@ -132,9 +136,10 @@
 
 	.fa-times {
 		position: fixed;
-		top: 1em;
-		right: 0;
+		top: 0;
+		padding-top: 20px;
 		padding-right: 20px;
+		right: 0;
 		font-size: 30px;
 	}
 
@@ -174,6 +179,14 @@
 			padding-top: 25px;
 		}
 
+		.fa-bars{
+			padding-right:1.5em;
+		}
+
+		.fa-times{
+			padding-right:1.5em;
+		}
+
 	}
 
 	@media only screen and (min-width: 768px) {
@@ -190,6 +203,15 @@
 		h3{
 			font-size: 30px;
 		}
+
+		.fa-bars{
+			padding-right:2em;
+		}
+
+		.fa-times{
+			padding-right:2em;
+		}
+
 	}
 
 	@media only screen and (min-width: 992px) {
@@ -197,13 +219,16 @@
 			font-size: 12px;
 			-webkit-text-stroke-width: 1px;
 		}
+
 	}
 
 	@media only screen and (min-width: 1200px) {
 		h1{
 			
 		}
+
 	}
+
 
 
 
@@ -211,9 +236,18 @@
 </head>
 
 <body>
+	<div class="row">
+			<span class="col-11"></span>
+			<div class="col-1"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			<br>
+		</div>
 
+	
 
-	<section class="menu text-center" id="menu">
+	<div class="container">
+		
+
+		<section class="menu text-center" id="menu">
 		<i class="fa fa-times" aria-hidden="true"></i>
 		<nav>
 			<a href="#">Home</a>
@@ -224,12 +258,6 @@
 		</nav>
 
 	</section>
-
-	<div class="container">
-		<div class="row">
-			<span class="col-10"></span>
-			<div class="col-1"><i class="fa fa-bars" aria-hidden="true"></i></div>
-		</div>
 
 
 
