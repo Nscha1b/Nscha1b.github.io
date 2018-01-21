@@ -46,11 +46,6 @@
         		});
     		});
 
-			//Add pop up text when over project thumbnail
-			$(".text").hide().removeClass("text").addClass("text-js");
-			$(".thumb").hover(function () {
-				$(this).find(".text-js").fadeToggle();
-			});
 
 			//change opacitiy when over project thumbnail
 			$(".thumb").hover(function() {
@@ -93,6 +88,11 @@
 			text-align: center;
 		}
 
+		#profile-pic {
+    		width: 300px;
+    		height: 300px;
+		}
+
 		.iconSize {
 			font-size: 30px;
 			width: 50px;
@@ -103,23 +103,18 @@
 			  vertical-align: middle;
 		}
 
-		.thumb {
-			position: relative;
+
+
+		.img-thumbnail {
+			height: 250px;
+			width: 250px;
 		}
 
-		.text,
-		.text-js {
-			display: none;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			text-align: center
+		.thumb{
+
 		}
 
-		.thumb:hover .text {
-			display: block
-		}
+
 
 		.input-sizing {
 			width: 300%;
@@ -154,7 +149,34 @@
 				width: 145%;
 				resize: none;
 			}
+
 		}
+
+		@media only screen and (max-width: 767px) {
+    	#profile-pic {
+    		margin-left: 6.2em;
+    	}
+
+    	.img-thumbnail {
+			height: 170px;
+			width: 170px;
+		}
+
+		}
+
+		@media only screen and (max-width: 460px) {
+    	#profile-pic {
+    		margin-left: 1.5em;
+    	}
+
+    	.img-thumbnail {
+			height: 225px;
+			width: 225px;
+		}
+
+		}
+
+
 	</style>
 </head>
 
@@ -206,19 +228,18 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<img id="profile-pic" src="Nick.jpg" class="rounded-circle  img-fluid text-center" alt="Photo of Nick Schafer" max-width="100%"
-				 height="auto">
+				<img id="profile-pic" src="Nick.jpg" class="rounded-circle text-center" alt="Photo of Nick Schafer" >
 			</div>
 		</div>
 	</div>
 	<div class="container pt-4">
-		<h2>Portfolio</h2>
+		<h2 class="">Projects</h2>
 		<div class="row">
 			<div class="col-sm-4 py-3 text-center">
 
 				<div class="thumb">
 					<a href="quotemachine.html" target="_blank"> <img src="quotegen.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery, AJAX</div>
+					
 				</div>
 
 				<h6 class="py-4 text-dark">Random Quote Machine</h6>
@@ -226,14 +247,14 @@
 			<div class="col-sm-4 py-3 text-center">
 				<div class="thumb">
 					<a href="weatherapp.html" target="_blank"> <img src="weatherapp.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery, AJAX</div>
+					
 				</div>
 				<h6 class="py-4 text-dark">Local weather Generator</h6>
 			</div>
 			<div class="col-sm-4 py-3 text-center">
 				<div class="thumb">
 					<a href="wikipediaviewer.html" target="_blank"> <img src="wikiapp.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery, AJAX</div>
+					
 				</div>
 				<h6 class="py-4 text-dark">Wikipedia Viewer</h6>
 			</div>
@@ -242,21 +263,21 @@
 			<div class="col-sm-4 py-3 text-center">
 				<div class="thumb">
 					<a href="twitchStreamer.html" target="_blank"> <img src="twitchViewer.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery, AJAX</div>
+					
 				</div>
 				<h6 class="py-4 text-dark">Twitch Viewer</h6>
 			</div>
 			<div class="col-sm-4 py-3 text-center">
 				<div class="thumb">
 					<a href="calculator.html" target="_blank"> <img src="calc.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery,</div>
+					
 				</div>
 				<h6 class="py-4 text-dark">Javascript Calculator</h6>
 			</div>
 			<div class="col-sm-4 py-3 text-center">
 				<div class="thumb">
 					<a href="pomodoroTimer.html" target="_blank"> <img src="timer.jpg" class="img-thumbnail"> </a>
-					<div class="text">Tools used: JavaScript, jQuery,</div>
+					
 				</div>
 				<h6 class="py-4 text-dark">Pomodoro Timer</h6>
 			</div>
