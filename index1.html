@@ -11,14 +11,22 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/242245a4a1.js"></script>
+	<link rel="stylesheet" href="animations.css">
+
+
+	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Permanent+Marker" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	
 
 
 	<!--This is where JAVASCRIPT BEIGNS-->
 
 	<SCRIPT>
 		$(document).ready(function () {
+
+			
+
 
 			$(".fa-bars").on("click", function(){
 				$("#menu").addClass("menu-active");
@@ -60,7 +68,7 @@
 				$("#bigMenu").html("<a class='pl-4 pr-3' href='index1.html''>Home</a><a class='pr-3' href='about1.html'>About me</a><a class='pr-3' href='#'>Projects</a><a class='pr-3' href='#'>Contact</a>");
 			}
 
-
+wow.init();
 		});
 
 	</SCRIPT>
@@ -74,7 +82,7 @@
 	}
 
 	.top-section{
-  		height:100%;
+		height:100%;
 	}
 
 	.fa-bars{
@@ -379,13 +387,13 @@
 
 <body>
 	<div class="top-section">
-	<div class="row">
-		<span class="col-11"></span>
-		<div class="col-1"><i id="bars" class="fa fa-bars" aria-hidden="true"></i></div>
-		<div class="col-6"></div>
-		<span id="bigMenu" class="col-6 pl-5 text-nowrap bigMenu">
-			
-		</span>
+		<div class="row">
+			<span class="col-11"></span>
+			<div class="col-1"><i id="bars" class="fa fa-bars" aria-hidden="true"></i></div>
+			<div class="col-6"></div>
+			<span id="bigMenu" class="col-6 pl-5 text-nowrap bigMenu">
+
+			</span>
 			<br>
 		</div>
 
@@ -422,14 +430,17 @@
 		</div>
 	</div>
 
-	<div class="container">	
+	<div class="container">
+		<br>
 
-		<h2> here si some gsjflsdjfskfjldf </h2>
+		<div class='animatedParent animateOnce'data-appear-top-offset='20'>
+                  <h1 class="animated fadeInLeft text-center"> test</h1>
+                  </div>
 
 
 	</div>
 
+<script type="text/javascript" src="css3-animate-it.js"></script>
+</body>
 
-	</body>
-
-	</html>
+</html>
