@@ -68,7 +68,7 @@
 				$("#bigMenu").html("<a class='pl-4 pr-3' href='index1.html''>Home</a><a class='pr-3' href='about1.html'>About me</a><a class='pr-3' href='#'>Projects</a><a class='pr-3' href='#'>Contact</a>");
 			}
 
-wow.init();
+			wow.init();
 		});
 
 	</SCRIPT>
@@ -288,6 +288,19 @@ wow.init();
 		width: 500px;
 	}
 
+	.imageAndText {
+		position: relative;
+		left: 45px;
+	} 
+
+	.imageAndText .col {
+		position: absolute;
+		z-index: 1;
+		top: 70px;
+		left: -60px;
+	}
+
+
 
 
 	@media only screen and (min-width: 200px) {
@@ -316,6 +329,16 @@ wow.init();
 
 		.fa-times{
 			padding-right:1.5em;
+		}
+
+		#belt {
+			height: 350px;
+			width: 350px;
+		}
+
+		#aboutText{
+			margin-top: 200px;
+			margin-left: 10px;
 		}
 
 	}
@@ -371,6 +394,11 @@ wow.init();
 		#profile-pic{
 			height: 450px;
 			width: 450px;
+		}
+
+		#belt {
+			height: 500px;
+			width: 500px;
 		}
 
 
@@ -438,16 +466,31 @@ wow.init();
 	<div class="container">
 		<br>
 
-		<div class='animatedParent animateOnce'data-appear-top-offset='20'>
-			<img id="belt" src="belt.png" class="" alt="Photo of jiujitsu belt">
-                  <h1 class="animated fadeInDown"> test</h1>
-                  
-                  </div>
+		<div class='animatedParent text-center animateOnce'data-appear-top-offset='-150'>
+
+			<div class="imageAndText">
+				<img id="belt" src="belt.png" class="">
+				<div class="col">
+					<div class="row">
+						<div class="col-md-6">
+							<h1 class="animated fadeInDown text-center">About<br>me</h1>
+						</div>
+						<div id="aboutText" class="col-md-6 col-sm-12">
+							<p class="animated fadeInRight">Hello, my name is Nick. I'm a Front-End devloper, and I like to design things. My shaky hands, and insufficient ability to draw have caused me to deviate
+								from the traditional forms of creativity. In retrospect this has been a huge influence on my path to generating content
+								using technology. In my free time I train, and also instruct the art of Brazilian Jiu-Jitsu. I enjoy actively engaging
+							in a fit lifestyle, while maintaining my pasta, and coffee addiction. Preferably not at the same time.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 
 	</div>
 
-<script type="text/javascript" src="css3-animate-it.js"></script>
+	<script type="text/javascript" src="css3-animate-it.js"></script>
 </body>
 
 </html>
