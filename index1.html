@@ -290,14 +290,25 @@
 
 	.imageAndText {
 		position: relative;
-		left: 45px;
+		left: 80px;
 	} 
 
 	.imageAndText .col {
 		position: absolute;
 		z-index: 1;
 		top: 70px;
-		left: -60px;
+		left: -90px;
+	}
+
+	#aboutHead{
+			position: relative;
+			left: 30px;
+		}
+
+
+	.offset{
+		position: relative;
+		margin-top: 380px;
 	}
 
 
@@ -338,7 +349,7 @@
 
 		#aboutText{
 			margin-top: 200px;
-			margin-left: 10px;
+			margin-left: 50px;
 		}
 
 	}
@@ -379,9 +390,25 @@
 			font-size: 20px;
 		}
 
+		#belt {
+			height: 450px;
+			width: 450px;
+		}
+
+		#aboutHead{
+			font-size: 60px;
+			position: relative;
+			left: 190px;
+		}
+
+		#aboutText{
+			margin-top: 280px;
+		}
+
+
 	}
 
-	@media only screen and (min-width: 992px) {
+	@media only screen and (min-width: 1010px) {
 		h1{
 			font-size: 70px;
 			-webkit-text-stroke-width: 1px;
@@ -397,8 +424,28 @@
 		}
 
 		#belt {
-			height: 500px;
-			width: 500px;
+			height: 450px;
+			width: 450px;
+		}
+
+
+
+		.imageAndText .col {
+			position: absolute;
+			z-index: 1;
+			top: 70px;
+			left: 0px;
+		}
+
+		#aboutHead{
+			font-size: 60px;
+			position: relative;
+			left: 160px;
+		}
+
+		#aboutText{
+			margin-top: -140px;
+			margin-left: 630px;
 		}
 
 
@@ -408,6 +455,18 @@
 		#profile-pic{
 			height: 500px;
 			width: 500px;
+		}
+
+		.imageAndText {
+			left: -260px;
+		} 
+
+		#aboutHead{
+			left: 200px;
+		}
+
+		#aboutText{
+			margin-left: 810px;
 		}
 
 	}
@@ -472,11 +531,11 @@
 				<img id="belt" src="belt.png" class="">
 				<div class="col">
 					<div class="row">
-						<div class="col-md-6">
-							<h1 class="animated fadeInDown text-center">About<br>me</h1>
+						<div class="col-md-6 col-lg-6">
+							<h1 id="aboutHead" class="animated fadeInDown text-center">About<br>me</h1>
 						</div>
-						<div id="aboutText" class="col-md-6 col-sm-12">
-							<p class="animated fadeInRight">Hello, my name is Nick. I'm a Front-End devloper, and I like to design things. My shaky hands, and insufficient ability to draw have caused me to deviate
+						<div id="aboutText" class="col-md-12 col-lg-6 col-sm-12">
+							<p class="animated fadeInRight">Hello, my name is Nick. I'm a Front-End developer, and I like to design things. My shaky hands, and insufficient ability to draw have caused me to deviate
 								from the traditional forms of creativity. In retrospect this has been a huge influence on my path to generating content
 								using technology. In my free time I train, and also instruct the art of Brazilian Jiu-Jitsu. I enjoy actively engaging
 							in a fit lifestyle, while maintaining my pasta, and coffee addiction. Preferably not at the same time.</p>
@@ -485,6 +544,11 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div class="container offset">
+			<br>
+				<h1 class="text-center">Projects</h1>
 		</div>
 
 
