@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="Nick Schafer" content="Nick Schafer">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nick Schafer</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+
+	
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Permanent+Marker" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+
+
+<style type="text/css">
+body {
+	background-color: #535353;
+}
+.block {
+	height: 14vw;
+	width: 14vw;
+	background-color: #1a0315;
+	border: 3px solid #6e3667;
+	color: #88d317;
+	font-size: 9vw;
+	cursor: pointer;
+}
+
+.outline {
+	position: absolute;
+	left: 29%;
+	text-align: center;
+	display: inline-block;
+}
+.turn {
+	font-size: 2vw;
+	margin-left: 10.2vw;
+	background-color: #6e3667;
+	margin-bottom: -0vw;
+	border: 1px solid black;
+	border-bottom: none;
+}
+.wins {
+	padding-top: 1vw;
+}
+
+.status {
+	margin-left: 5.5vw;
+	font-size: 2vw;
+	background-color: #6e3667;
+	margin-bottom: -0vw;
+	border: 1px solid black;
+	border-top: none;
+}
+.x {
+	cursor: pointer;
+}
+.o {
+	cursor: pointer;
+}
+@media screen and (min-width: 1500px) {
+	.block {
+		height: 1.5em;
+		width: 1.5em;
+		font-size: 9vw;
+	}
+}
+
+
+
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row text-center wins text-white">
+			<h5 class="col-6" id="userWins">User: 0</h5>
+			<h5 class="col-6" id="cpuWins">Cpu: 0</h5>
+		</div>
+		<div class="outline">
+			<div class="container">
+				<div class="row text-white">
+					<p class="col-6 text-center turn"></p>
+				</div>
+				<div class="row text-center" id="topRow">
+					<div class="block" id="1"></div>
+					<div class="block" id="2"></div>
+					<div class="block" id="3"></div>
+				</div>
+				<div class="row text-center" id="middleRow">
+					<div class="block" id="4"></div>
+					<div class="block" id="5"></div>
+					<div class="block" id="6"></div>
+				</div>
+				<div class="row text-center" id="bottomRow">
+					<div class="block" id="7"></div>
+					<div class="block" id="8"></div>
+					<div class="block" id="9"></div>
+				</div>
+				<div class="row text-white">
+					<p class="col-9 text-center status">Do you want to be X's, or O's?<br><span class="x col-2">X</span><span class="o col-2">O</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+	<SCRIPT>
+		var userIcon;
+		var cpuIcon;
+		var turn = "cpu";
+		var blocksUsed = [];
+		var userBlocks = [];
+		var cpuBlocks = [];
+		var userWins = 0;
+		var cpuWins = 0;
+		var gameOver = false;
+
+//user can add icon when his turn
+$(".block").on("click", function() {
+	if (turn == "user") {
+		this.append(userIcon);
+		blocksUsed.push(parseInt(this.getAttribute("id")));
+		userBlocks.push(parseInt(this.getAttribute("id")));
+		checkWin(userBlocks, "user");
+	}
+	swapTurn();
+	if (gameOver == false) {
+		cpuTurn(turn);
+	}
+});
+
+//generate a random number
+function random() {
+	var x = Math.floor(Math.random() * 9 + 1);
+	return x;
+}
+
+//check if a block has been used already
+function checkBlocks(num) {
+	while ($.inArray(num, blocksUsed) !== -1 || gameOver == true) {
+		num = random();
+	}
+	if ($.inArray(num, blocksUsed) == -1) {
+		return num;
+	}
+}
+
+//swap who's turn it is
+function swapTurn() {
+	if (turn == "user") {
+		turn = "cpu";
+	} else {
+		turn = "user";
+	}
+	updateTurnText();
+}
+
+//cpu can add icon when cpu turn
+function cpuTurn(check) {
+	if (check == "cpu" && gameOver == false) {
+		var randomNum = improveAI();
+		randomNum = checkBlocks(randomNum);
+		blocksUsed.push(randomNum);
+		cpuBlocks.push(randomNum);
+		setTimeout(function() {
+			$("#" + randomNum).append(cpuIcon);
+			swapTurn();
+		}, 1000);
+		checkWin(cpuBlocks, "cpu");
+	}
+}
+
+//reset the board
+function reset() {
+	setTimeout(function() {
+		$(".block").html("");
+		$(".status").html("");
+		$(".turn").show();
+	}, 3000);
+	blocksUsed.length = 0;
+	userBlocks.length = 0;
+	cpuBlocks.length = 0;
+	setTimeout(function() {
+		gameOver = false;
+		cpuTurn(turn);
+	}, 4000);
+}
+
+//check for win
+function checkWin(checkArray, player) {
+  //top row
+  if (
+  	$.inArray(1, checkArray) !== -1 &&
+  	$.inArray(2, checkArray) !== -1 &&
+  	$.inArray(3, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //middle row
+  if (
+  	$.inArray(4, checkArray) !== -1 &&
+  	$.inArray(5, checkArray) !== -1 &&
+  	$.inArray(6, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //bottom row
+  if (
+  	$.inArray(7, checkArray) !== -1 &&
+  	$.inArray(8, checkArray) !== -1 &&
+  	$.inArray(9, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //first row
+  if (
+  	$.inArray(1, checkArray) !== -1 &&
+  	$.inArray(4, checkArray) !== -1 &&
+  	$.inArray(7, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //second row
+  if (
+  	$.inArray(2, checkArray) !== -1 &&
+  	$.inArray(5, checkArray) !== -1 &&
+  	$.inArray(8, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //third row
+  if (
+  	$.inArray(3, checkArray) !== -1 &&
+  	$.inArray(6, checkArray) !== -1 &&
+  	$.inArray(9, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //diagonal left to right
+  if (
+  	$.inArray(1, checkArray) !== -1 &&
+  	$.inArray(5, checkArray) !== -1 &&
+  	$.inArray(9, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+  //diagonal right to left
+  if (
+  	$.inArray(3, checkArray) !== -1 &&
+  	$.inArray(5, checkArray) !== -1 &&
+  	$.inArray(7, checkArray) !== -1
+  	) {
+  	addScore(player);
+  gameOver = true;
+  checkGameOver();
+}
+if (blocksUsed.length == 9) {
+	gameOver = true;
+	$(".status").html("Draw!");
+	$(".turn").hide();
+	reset();
+}
+}
+
+function addScore(player) {
+	if (player == "user") {
+		userWins++;
+		$("#userWins").html("User: " + userWins);
+		$(".status").html("You Win!");
+		$(".turn").hide();
+	} else if (player == "cpu") {
+		cpuWins++;
+		$("#cpuWins").html("Cpu: " + cpuWins);
+		$(".status").html("You Lost!");
+		$(".turn").hide();
+	}
+}
+
+function checkGameOver() {
+	if (gameOver == true) {
+		reset();
+	}
+}
+
+function updateTurnText() {
+	if (turn == "cpu") {
+		$(".turn").html("Cpu Turn");
+	} else if (turn == "user") {
+		$(".turn").html("Your Turn");
+	}
+}
+
+$(".x").on("click", function() {
+	userIcon = "X";
+	cpuIcon = "O";
+	$(".status").html("");
+	updateTurnText();
+	cpuTurn(turn);
+});
+
+$(".o").on("click", function() {
+	userIcon = "O";
+	cpuIcon = "X";
+	$(".status").html("");
+	updateTurnText();
+	cpuTurn(turn);
+});
+
+function improveAI() {
+	var number;
+  //top row
+  if ($.inArray(1, cpuBlocks) !== -1 && $.inArray(2, cpuBlocks) !== -1) {
+  	number = 3;
+  } else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(1, cpuBlocks) !== -1) {
+    //top row
+    number = 2;
+} else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(2, cpuBlocks) !== -1) {
+    //top row
+    number = 1;
+} else if ($.inArray(4, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //middle row
+    number = 6;
+} else if ($.inArray(6, cpuBlocks) !== -1 && $.inArray(4, cpuBlocks) !== -1) {
+    //middle row
+    number = 5;
+} else if ($.inArray(6, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //middle row
+    number = 4;
+} else if ($.inArray(7, cpuBlocks) !== -1 && $.inArray(8, cpuBlocks) !== -1) {
+    //bottom row
+    number = 9;
+} else if ($.inArray(7, cpuBlocks) !== -1 && $.inArray(9, cpuBlocks) !== -1) {
+    //bottom row
+    number = 8;
+} else if ($.inArray(9, cpuBlocks) !== -1 && $.inArray(8, cpuBlocks) !== -1) {
+    //bottom row
+    number = 7;
+} else if ($.inArray(1, cpuBlocks) !== -1 && $.inArray(4, cpuBlocks) !== -1) {
+    //first row
+    number = 7;
+} else if ($.inArray(1, cpuBlocks) !== -1 && $.inArray(7, cpuBlocks) !== -1) {
+    //first row
+    number = 4;
+} else if ($.inArray(4, cpuBlocks) !== -1 && $.inArray(7, cpuBlocks) !== -1) {
+    //first row
+    number = 1;
+} else if ($.inArray(2, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //second row
+    number = 8;
+} else if ($.inArray(2, cpuBlocks) !== -1 && $.inArray(8, cpuBlocks) !== -1) {
+    //second row
+    number = 5;
+} else if ($.inArray(5, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //second row
+    number = 2;
+} else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(6, cpuBlocks) !== -1) {
+    //third row
+    number = 9;
+} else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(9, cpuBlocks) !== -1) {
+    //third row
+    number = 6;
+} else if ($.inArray(9, cpuBlocks) !== -1 && $.inArray(6, cpuBlocks) !== -1) {
+    //third row
+    number = 3;
+} else if ($.inArray(1, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //diagonal left to right
+    number = 9;
+} else if ($.inArray(1, cpuBlocks) !== -1 && $.inArray(9, cpuBlocks) !== -1) {
+    //diagonal left to right
+    number = 5;
+} else if ($.inArray(9, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //diagonal left to right
+    number = 1;
+} else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //diagonal right to left
+    number = 7;
+} else if ($.inArray(3, cpuBlocks) !== -1 && $.inArray(7, cpuBlocks) !== -1) {
+    //diagonal right to left
+    number = 5;
+} else if ($.inArray(7, cpuBlocks) !== -1 && $.inArray(5, cpuBlocks) !== -1) {
+    //diagonal right to left
+    number = 3;
+}
+
+  //top row
+  if ($.inArray(1, userBlocks) !== -1 && $.inArray(2, userBlocks) !== -1) {
+  	number = 3;
+  } else if (
+  	$.inArray(3, userBlocks) !== -1 &&
+  	$.inArray(1, userBlocks) !== -1
+  	) {
+    //top row
+    number = 2;
+} else if (
+	$.inArray(3, userBlocks) !== -1 &&
+	$.inArray(2, userBlocks) !== -1
+	) {
+    //top row
+    number = 1;
+} else if (
+	$.inArray(4, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //middle row
+    number = 6;
+} else if (
+	$.inArray(6, userBlocks) !== -1 &&
+	$.inArray(4, userBlocks) !== -1
+	) {
+    //middle row
+    number = 5;
+} else if (
+	$.inArray(6, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //middle row
+    number = 4;
+} else if (
+	$.inArray(7, userBlocks) !== -1 &&
+	$.inArray(8, userBlocks) !== -1
+	) {
+    //bottom row
+    number = 9;
+} else if (
+	$.inArray(7, userBlocks) !== -1 &&
+	$.inArray(9, userBlocks) !== -1
+	) {
+    //bottom row
+    number = 8;
+} else if (
+	$.inArray(9, userBlocks) !== -1 &&
+	$.inArray(8, userBlocks) !== -1
+	) {
+    //bottom row
+    number = 7;
+} else if (
+	$.inArray(1, userBlocks) !== -1 &&
+	$.inArray(4, userBlocks) !== -1
+	) {
+    //first row
+    number = 7;
+} else if (
+	$.inArray(1, userBlocks) !== -1 &&
+	$.inArray(7, userBlocks) !== -1
+	) {
+    //first row
+    number = 4;
+} else if (
+	$.inArray(4, userBlocks) !== -1 &&
+	$.inArray(7, userBlocks) !== -1
+	) {
+    //first row
+    number = 1;
+} else if (
+	$.inArray(2, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //second row
+    number = 8;
+} else if (
+	$.inArray(2, userBlocks) !== -1 &&
+	$.inArray(8, userBlocks) !== -1
+	) {
+    //second row
+    number = 5;
+} else if (
+	$.inArray(5, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //second row
+    number = 2;
+} else if (
+	$.inArray(3, userBlocks) !== -1 &&
+	$.inArray(6, userBlocks) !== -1
+	) {
+    //third row
+    number = 9;
+} else if (
+	$.inArray(3, userBlocks) !== -1 &&
+	$.inArray(9, userBlocks) !== -1
+	) {
+    //third row
+    number = 6;
+} else if (
+	$.inArray(9, userBlocks) !== -1 &&
+	$.inArray(6, userBlocks) !== -1
+	) {
+    //third row
+    number = 3;
+} else if (
+	$.inArray(1, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //diagonal left to right
+    number = 9;
+} else if (
+	$.inArray(1, userBlocks) !== -1 &&
+	$.inArray(9, userBlocks) !== -1
+	) {
+    //diagonal left to right
+    number = 5;
+} else if (
+	$.inArray(9, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //diagonal left to right
+    number = 1;
+} else if (
+	$.inArray(3, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //diagonal right to left
+    number = 7;
+} else if (
+	$.inArray(3, userBlocks) !== -1 &&
+	$.inArray(7, userBlocks) !== -1
+	) {
+    //diagonal right to left
+    number = 5;
+} else if (
+	$.inArray(7, userBlocks) !== -1 &&
+	$.inArray(5, userBlocks) !== -1
+	) {
+    //diagonal right to left
+    number = 3;
+} else {
+	number = random();
+}
+return number;
+}
+
+</SCRIPT>
+
+</html>

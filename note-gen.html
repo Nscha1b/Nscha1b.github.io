@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Note Gen</title>
+  
+  
+  
+  
+  
+</head>
+
+<body>
+
+  <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="PNC Note Generator" content="PNC Note Generator">
+	<title>Note Generator v1.01</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<script src="https://use.fontawesome.com/242245a4a1.js"></script>
+
+	<!--This is where CSS BEGIN-->
+	<style type="text/css">
+	body {
+		padding: 20px;
+		background: #fafafa;
+	}
+
+	label {
+		font-weight: bold;
+	}
+
+	.spacer {
+		padding-bottom: 10px;
+	}
+
+	.badge {
+		height: 35px;
+		font-style: @font-family-sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+	.txt-primary {
+		color: #FF5A09;
+		font-family: "times";
+	}
+
+	.txt-secondary{
+		color: #0066ff;
+		font-family: "times";
+	}
+    
+    textarea{
+      height: 1px;
+      width: 1px;
+    }
+
+	.back-secondary{
+		position: fixed;
+		display: block;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(54, 47, 47, 0.94);
+		z-index: 2;
+		cursor: pointer;
+		font-family: "times";
+		overflow: auto;
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-bottom: 5px;
+	}
+
+	.form-control {
+		border: 2px solid red;
+		border-radius: 4px;
+	}
+	.fa {
+		color: #0066ff;
+		position: relative;
+		font-size: 30px;
+		left: 1.5em;
+	}
+
+	</style>
+</head>
+<body>
+	<!--This is where HTML BEGIN-->
+	<div class="back-secondary">
+		<h1 class="display-4 text-center txt-secondary col-12 pb-1">Using the Note Generator:</h1>
+		<div class="container border border-danger"><h2 class="text-danger display-5 text-center col-12">Important:</h2>
+      <p class="text-white text-center col-12">If you click the copy button and get a pop up asking "Do you want to allow this webpage to access your clipboard?" Click yes, or else you won't be able to copy the data.</p>
+			<p class="text-white text-center col-12">When typing the procedure number, Just type the procedures digits/letters and underscore's will be generated automatically. FOR EXAMPLE: 00.UV.02 WOULD BE ENTERED AS 00UV02.</p>
+			<p class="text-white text-center col-12">Don't type the loan number in the short Desctiption, this will be added automatically.</p>
+			<p class="text-white text-center col-12">Do not manually type in "HLHD - Empower - Mortgage -" for the short description, this will be generated automatically.</p>
+      <p class="text-white text-center col-12">Always reset the form after each call. This prevents printing the wrong data.</p>
+		</div>
+		<h3 class="pt-3 pb-3 font-italic txt-secondary text-center col-12">The purpose of the Note Generator is to help create a perfect ticket every time!</h3>
+		<p class="col-12 text-white text-center pb-3">Don't worry, it's simple to use... Follow along with the questionnaire. Based off of your selections, additional questions
+			may appear. When you generate enough information for the ticket, 3 buttons will pop up.</p>
+			<div class="container text-center"><button type="button" class="btn btn-primary">Copy Short Description Notes<br>(Paste into Service Now Short Description field)</button></div>
+			<p class="pt-3 text-center text-white col-12">will copy the information you should paste into
+				the service now short description field to your clipboard.</p>
+				<div class="pt-3 container text-center"><button type="button" class="btn btn-primary">Copy NoteGenerator detail<br>(Paste into Service Now Customer Notes)</button></div>
+				<p class="pt-3 text-center col-12 text-white">will copy the information you should paste into
+					the additional comments section in service now to your clipboard.</p>
+					<div class="container pt-3 text-center"><button type="button" class="btn btn-danger">Reset</button></div>
+					<p class="pt-3 text-center col-12 text-white">will clear the form for the next call.</p>
+					<h3 class="pb-3 font-italic text-center col-12 txt-secondary">The keyboard shortcut to paste is ctrl+v</h3>
+					<p class="pt-3 text-center font-weight-bold col-12 text-white">Click anywhere to start...</p>
+				</div>
+				<div class="pb-3 pt-3 border border-dark container">
+					<div class="col-12 row">
+						<div class="col-11 row">
+							<h2 class="txt-primary" id="title">PNC</h2>
+							<h5 class="txt-secondary pt-2 pl-1" id="dropTitle">Note Generator v1.01</h5>
+						</div>
+
+						<div class="col-1 text-right"><a href="javascript:;" class="help"><i class="fa fa-question-circle" aria-hidden="true"></i></a></div>
+
+					</div>
+
+
+					<div class="container">
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+              <div class="col-4"><button type="button" class="col-12 btn btn-danger" id="resetButtonTop">Reset</button></div>
+            </div>
+						<form id="noteGen">
+							<div class="form-group">
+								<label for="callType">Call Type:</label>
+								<select class="form-control" id="callType">
+									<option value="" selected disabled hidden></option>
+									<option value="Sales">Sales</option>
+									<option value="Mortgage Ops Call">Mortgage Ops Call</option>
+									<option value="Non Prod or Transferred">Non Prod or Transferred</option>
+                  <option value="NON-HE Genesis Tickets">NON-HE Genesis Tickets</option>
+                  <option value="HE TICKETS">HE TICKETS</option>
+                  <option value="CROSS SELL REFERRAL DISCREPANCY TICKETS">CROSS SELL REFERRAL DISCREPANCY TICKETS</option>
+								</select>
+							</div>
+              
+              <div class="form-group locationForm">
+								<label for="location">Location:</label>
+								<select class="form-control" id="location">
+									<option value="" selected disabled hidden></option>
+									<option value="Downers Grove">Downers Grove</option>
+									<option value="Jacksonville">Jacksonville</option>
+									<option value="Pittsburgh">Pittsburgh</option>
+								</select>
+							</div>
+              
+              <div class="form-group nonProdIssueForm">
+								<label for="nonProdIssue">Is the issue with Mortgage or any of its systems?</label>
+								<select class="form-control" id="nonProdIssue">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+              
+              <div class="form-group nonProdIssueQuestionForm">
+								<label for="nonProdIssueQuestion">Is there a Loan Number associated with the issue</label>
+								<select class="form-control" id="nonProdIssueQuestion">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+              
+              <div class="form-group functionForm">
+								<label for="function">Role:</label>
+								<select class="form-control" id="function">
+									<option value="" selected disabled hidden></option>
+									<option value="Pre-Underwriter">Pre-Underwriter</option>
+									<option value="Underwriter">Underwriter</option>
+									<option value="Processor">Processor</option>
+                  <option value="Collaterial Reviewer">Collaterial Reviewer</option>
+                  <option value="Closer">Closer</option>
+                  <option value="Funder">Funder</option>
+								</select>
+							</div>
+
+							<div class="form-group platformForm">
+								<label for="platform">Platform:</label>
+								<select class="form-control" id="platform">
+									<option value="" selected disabled hidden></option>
+									<option value="Empower">Empower</option>
+									<option value="Genesis">Genesis</option>
+									<option value="Sales Edge">Sales Edge</option>
+									<option value="Multiple">Multiple</option>
+								</select>
+							</div>
+
+							<div class="form-group issueOriginatorForm">
+								<label for="issue">Issue:</label>
+								<select class="form-control" id="issueOriginator">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Genesis">Login issue for Genesis</option>
+									<option value="Login issue for Sales Edge">Login issue for Sales Edge</option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue Other">Login issue Other</option>
+									<option value="Sales Edge Lead not showing in Empower">Sales Edge Lead not showing in Empower</option>
+									<option value="Genesis or Sales Edge issue not listed above">Genesis or Sales Edge issue not listed above</option>
+									<option value="AUS issue">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+									<option value="Compliance Ease issue">Compliance Ease issue</option>
+									<option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+									<option value="Escrow Issue">Escrow Issue</option>
+									<option value="Fee issue">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+									<option value="Credit report issue">Credit report issue (unable to pull, receive, etc)</option>
+									<option value="Document issue">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+									<option value="Assigning Borrowers">Assigning Borrowers</option>
+									<option value="Issue with ordering Title, Appraisal">Issue with ordering Title, Appraisal</option>
+									<option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+									<option value="Mortgage Product Issue">Mortgage Product Issue (including Loan Product Advisor)</option>
+									<option value="20 Data Points">Issue with any of the 20 application data points (aka URLA)</option>
+									<option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+									<option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+								</select>
+							</div>
+     
+              	<div class="form-group issuePreUnderwriterForm">
+								<label for="issuePreUnderwriter">Issue:</label>
+								<select class="form-control" id="issuePreUnderwriter">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Loan Conditions Issue">Loan Conditions Issue</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+              
+      <div class="form-group issueUnderwriterForm">
+								<label for="issueUnderwriter">Issue:</label>
+								<select class="form-control" id="issueUnderwriter">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Loan Conditions Issue">Loan Conditions Issue</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+              
+           <div class="form-group issueProcessorForm">
+								<label for="issueProcessor">Issue:</label>
+								<select class="form-control" id="issueProcessor">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Loan Conditions Issue">Loan Conditions Issue</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+              
+              <div class="form-group issueCollaterialReviewForm">
+								<label for="issueCollaterialReview">Issue:</label>
+								<select class="form-control" id="issueCollaterialReview">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Loan Conditions Issue">Loan Conditions Issue</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+              
+             <div class="form-group issueCloserForm">
+								<label for="issueCloser">Issue:</label>
+								<select class="form-control" id="issueCloser">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Unable to reconcile the CD">Unable to reconcile the CD</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+              
+                <div class="form-group issueFunderForm">
+								<label for="issueFunder">Issue:</label>
+								<select class="form-control" id="issueFunder">
+									<option value="" selected disabled hidden></option>
+									<option value="Login issue for Empower">Login issue for Empower</option>
+									<option value="Login issue for other than Empower">Login issue for other than Empower</option>
+									<option value="AUS issue (Desktop Underwriter, Loan Prospector, etc)">AUS issue (Desktop Underwriter, Loan Prospector, etc)</option>
+                  <option value="Compliance Ease issue">Compliance Ease issue</option>
+                  <option value="MI or MIP issue (Mortgage Insurance)">MI or MIP issue (Mortgage Insurance)</option>
+                  <option value="Escrow Issue">Escrow Issue</option>
+                  <option value="Fee issue (Including Smart GFE) but not related to Escrow and MI">Fee issue (Including Smart GFE) but not related to Escrow and MI</option>
+                  <option value="Credit report issue (unable to pull, receive, etc)">Credit report issue (unable to pull, receive, etc)</option>
+                  <option value="Document issue (unable to send or missing information, also including Docutech related problems)">Document issue (unable to send or missing information, also including Docutech related problems)</option>
+                  <option value="Assigning Borrowers">Assigning Borrowers</option>
+                  <option value="Issue with ordering or working a Title, Appraisal, Flood, Core Logic">Issue with ordering or working a Title, Appraisal, Flood, Core Logic</option>
+                  <option value="Pricing or Rate Lock issue">Pricing or Rate Lock issue</option>
+                  <option value="Mortgage Product Issue (including Loan Product Advisor)">Mortgage Product Issue (including Loan Product Advisor)</option>
+                  <option value="Issue with any of the 20 application data points (aka URLA)">Issue with any of the 20 application data points (aka URLA)</option>
+                  <option value="Unable to send to proper Destination">Unable to send to proper Destination</option>
+                  <option value="Government Loan (FHA, VA, etc) issue not related to any other issue">Government Loan (FHA, VA, etc) issue not related to any other issue</option>
+                  <option value="Procedure Question or Problem">Procedure Question or Problem</option>
+                  <option value="Empower system issue (locking up, not saving, timing out, kicking out)">Empower system issue (locking up, not saving, timing out, kicking out)</option>
+                  <option value="Issue with Wire">Issue with Wire</option>
+                  <option value="Business Card Directory issue">Business Card Directory issue</option>
+                  <option value="OFAC issue">OFAC issue</option>
+								</select>
+							</div>
+
+							<div class="form-group shortDescriptionForm">
+								<label for="loanNumber3">Short Description:</label>
+								<input type="text" class="form-control" maxlength="256" id="shortDescription" placeholder="Short Description of issue">
+							</div>
+
+							<div class="form-group procedureQuestionForm">
+								<label for="procedureQuestion">Were you able to solve this with a procedure?</label>
+								<select class="form-control" id="procedureQuestion">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group procedureNumberForm">
+								<label for="procedureNumber">Procedure Number:</label>
+								<input type="text" class="form-control" maxlength="7" id="procedureNumber" placeholder="##_##_##   Located in the Procedure's Header ">
+							</div>
+
+							<div class="form-group moveOnForm">
+								<label for="moveOn">Is the caller able to move on from the issue (due either to resolving it for them, or not stopping them from moving forward)?</label>
+								<select class="form-control" id="moveOn">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group loanQuestionForm">
+								<label for="loanQuestion">Is there a Loan Number or Sales Edge lead number associated with this issue?</label>
+								<select class="form-control" id="loanQuestion">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group loanNumberForm">
+								<label for="loanNumber">Loan Number:</label>
+								<input type="text" class="form-control" maxlength="10" id="loanNumber" placeholder="Loan number or Sales Edge lead number">
+							</div>
+
+							<div class="form-group loanQuestionForm2">
+								<label for="loanQuestion2">Is there another Loan Number or Sales Edge lead number that is associated?</label>
+								<select class="form-control" id="loanQuestion2">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group loanNumberForm2">
+								<label for="loanNumber">Loan Number:</label>
+								<input type="text" class="form-control" maxlength="10" id="loanNumber2" placeholder="Loan number or Sales Edge lead number">
+							</div>
+
+							<div class="form-group loanQuestionForm3">
+								<label for="loanQuestion3">Is there another Loan Number or Sales Edge lead number that is associated?</label>
+								<select class="form-control" id="loanQuestion3">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group loanNumberForm3">
+								<label for="loanNumber3">Loan Number:</label>
+								<input type="text" class="form-control" maxlength="10" id="loanNumber3" placeholder="Loan number or Sales Edge lead number">
+							</div>
+
+							<div class="form-group feedbackQuestionForm">
+								<label for="feedbackQuestion">Do you have Feedback for the developer to consider?</label>
+								<select class="form-control" id="feedbackQuestion">
+									<option value="" selected disabled hidden></option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+								</select>
+							</div>
+
+							<div class="form-group feedbackForm">
+								<label for="feedback">Feedback:</label>
+								<input type="text" class="form-control" maxlength="256" id="feedback" placeholder="Feedback for developer">
+							</div>
+
+						</div>
+
+						<div class="container ">
+							<div class="container">
+								<span class="badge badge-success col-12 text-center pt-2" id="success">Text Copied!</span>
+								<div class="col-12 spacer"></div>
+								<button type="button" class="col-12 btn btn-primary" id="shortTextButton">Copy Short Description Notes<br>(Paste into Service Now Short Description field)</button>
+								<div class="col-12 spacer"></div>
+								<button type="button" class=" col-12 btn btn-primary" id="descriptionButton">Copy NoteGenerator Detail<br>(Paste into Service Now Customer Notes)</button>
+								<div class="col-12 spacer"></div>
+                <button type="button" class=" col-12 btn btn-primary" id="genesisOutlineButton">Copy Genesis ticket outline<br>(Paste into Service Now Customer Notes)</button>
+                <div class="col-12 spacer"></div>
+                <button type="button" class="col-12 btn btn-danger" id="resetButton">Reset</button>
+								<div class="col-12 spacer"></div>
+							</div>
+						</div>
+
+					</form>
+
+
+
+					<div class="container">
+						<textarea id="shortTextBlock"></textarea>
+
+						<textarea id="descriptionBlock"></textarea>
+
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+
+		</body>
+
+		<!--This is where JAVASCRIPT BEIGNS-->
+
+		<SCRIPT>
+		//Run this after the whole page loads
+		$(document).ready(function() {
+			hideAll();
+
+			//listens for the form to change
+			$('form').on(' change', 'input, select, textarea', function(){
+				//set variables to their value on the form
+				var callType = $( "select#callType option:checked" ).val();
+        var nonProdIssue = $( "select#nonProdIssue option:checked" ).val();
+        var nonProdIssueQuestion = $( "select#nonProdIssueQuestion option:checked" ).val();
+				var platform = $( "select#platform option:checked" ).val();
+        var locationQuestion = $( "select#location option:checked" ).val();
+        var roleQuestion = $( "select#function option:checked" ).val();
+				var issueOriginator = $( "select#issueOriginator option:checked" ).val();
+        var issuePreUnderwriter = $( "select#issuePreUnderwriter option:checked" ).val();
+        var issueProcessor = $( "select#issueProcessor option:checked" ).val();
+        var issueCollaterialReview = $( "select#issueCollaterialReview option:checked" ).val();
+        var issueCloser = $( "select#issueCloser option:checked" ).val();
+        var issueFunder = $( "select#issueFunder option:checked" ).val();
+        var issueUnderwriter = $( "select#issueUnderwriter option:checked" ).val();
+				var shortDescription = $( "select#shortDescription option:checked" ).val();
+				var procedureQuestion = $( "select#procedureQuestion option:checked" ).val();
+				var procedureNumber = $( "select#procedureNumber option:checked" ).val();
+				var moveOn = $( "select#moveOn option:checked" ).val();
+				var loanQuestion = $( "select#loanQuestion option:checked" ).val();
+				var loanNumber = $( "select#loanNumber option:checked" ).val();
+				var loanQuestion2 = $( "select#loanQuestion2 option:checked" ).val();
+				var loanNumber2 = $( "select#loanNumber2 option:checked" ).val();
+				var loanQuestion3 = $( "select#loanQuestion3 option:checked" ).val();
+				var loanNumber3 = $( "select#loanNumber3 option:checked" ).val();
+				var feedbackQuestion = $( "select#feedbackQuestion option:checked" ).val();
+				var feedback = $( "select#Feedback option:checked" ).val();
+        var functionSelect = $( "select#function option:checked" ).val();
+        
+        
+       
+       var callTypeCheck = $('#callType').val();
+       var nonProdIssueCheck = $('#nonProdIssue').val();
+       var nonProdIssueQuestionCheck = $('#nonProdIssueQuestion').val();
+       var locationCheck = $('#location').val();
+       var platformCheck = $('#platform').val();
+       var issueOriginatorCheck = $('#issueOriginator').val();
+       var issuePreUnderwriterCheck = $('#issuePreUnderwriter').val();
+       var issueProcessorCheck = $('#issueProcessor').val();
+       var issueCollaterialReviewCheck = $('#issueCollaterialReview').val();
+       var issueCloserCheck = $('#issueCloser').val();
+       var issueFunderCheck = $('#issueFunder').val();
+       var issueUnderwriterCheck = $('#issueUnderwriter').val();
+       var roleQuestionCheck = $('#function').val();
+       var procedureQuestionCheck = $('#procedureQuestion').val();
+       var procedureNumberCheck = $('#procedureNumber').val().slice(0,6) + "0" + $('#procedureNumber').val().slice(6);
+       var loanQuestion2Check = $('#loanQuestion2').val();
+       var loanQuestion3Check = $('#loanQuestion3').val();
+       var loanNumbercheck = $('#loanNumber').val();
+       var loanNumber2check = $('#loanNumber2').val();
+       var loanNumber3check = $('#loanNumber3').val();
+       var loanNumber3check = $('#loanNumber3').val();
+       var feedbackCheck = $('#feedback').val();
+       var moveOnCheck = $('#moveOn').val();
+        var loanQuestionCheck = $('#loanQuestion').val();
+        
+
+        
+        //This set of statments deals with setting blank and Null values when printing to None.
+        if(loanNumbercheck == ""){
+          loanNumbercheck = "None";
+        }
+        else{
+          loanNumbercheck = $('#loanNumber').val().replace(/\./g,' ');
+        }
+        
+        
+        if(loanNumber2check == ""){
+          loanNumber2check = "None";
+        }
+        else{
+          loanNumber2check = $('#loanNumber2').val().replace(/\./g,' ');
+        }
+        
+
+        if(loanNumber3check == ""){
+          loanNumber3check = "None";
+        }
+        else{
+          loanNumber3check = $('#loanNumber3').val().replace(/\./g,' ');
+        }
+               
+
+        if(feedbackCheck == ""){
+          feedbackCheck = "None";
+        }
+        else{
+          feedbackCheck = $('#feedback').val().replace(/\./g,' ');
+        }
+        
+
+        if(procedureNumberCheck == ""){
+          procedureNumberCheck = "None";
+        }
+        else{
+          procedureNumberCheck = $('#procedureNumber').val().replace(/\./g,' ');
+        }
+        
+        if(loanQuestion2Check == null){
+          loanQuestion2Check = "None";
+        }
+        
+
+        if(loanQuestion3Check == null){
+          loanQuestion3Check = "None";
+        }
+        
+        if(roleQuestionCheck == null){
+          roleQuestionCheck = "Originator";
+        }
+        
+        if(platformCheck == null){
+          platformCheck = "Empower";
+        }
+        
+        if(locationCheck == null){
+          locationCheck = "None";
+        }
+        
+       
+        //This set of if statement is setting the role data to issue originator check for the data we actually print
+        if(callTypeCheck == "Sales"){
+          
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Pre-Underwriter"){
+          issueOriginatorCheck = issuePreUnderwriterCheck;
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Underwriter"){
+         issueOriginatorCheck = issueUnderwriterCheck;
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Processor"){
+          issueOriginatorCheck = issueProcessorCheck;
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Collaterial Reviewer"){
+          issueOriginatorCheck = issueCollaterialReviewCheck;
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Closer"){
+          issueOriginatorCheck = issueCloserCheck;
+        }
+        else if(callTypeCheck == "Mortgage Ops Call" && roleQuestionCheck == "Funder"){
+          issueOriginatorCheck = issueFunderCheck;
+        }
+        else if(callTypeCheck == "Non Prod or Transferred"){
+          issueOriginatorCheck = "NonProd";
+          roleQuestionCheck = "NonProd";
+          locationCheck = "NonProd";
+          if(nonProdIssueCheck == "Yes") {
+            platformCheck = "Empower";
+          }
+          else {
+            platformCheck = "NonEmpower";
+          }
+          moveOnCheck = "NonProd";
+          procedureQuestionCheck = "NonProd";
+          loanQuestionCheck = "NonProd";
+          if(nonProdIssueQuestion == "Yes"){
+            
+          }
+          else{
+            loanNumbercheck = "None"; 
+          }
+                   
+        }   
+        
+         //This is the note that actually gets printed for the copy description button
+				//the replace is removing periods and replacing with spaces
+        var note = "Note Generator v1.01\nCallType: " + callType + ".\n"
+        +"Role: " + roleQuestionCheck + ".\n"
+        +"Location: " + locationCheck + ".\n"
+				+"platform: " + platformCheck + ".\n"
+				+"issue: " + issueOriginatorCheck + ".\n"
+				+"procedureQuestion: " + procedureQuestionCheck + ".\n"
+				+"procedureNumber: " + procedureNumberCheck + ".\n"
+				+"moveOn: " + moveOnCheck + ".\n"
+				+"loanQuestion: " + loanQuestionCheck + ".\n"
+				+"loanNumber1: " + loanNumbercheck + ".\n"
+				+"loanQuestion2: " + loanQuestion2Check + ".\n"
+				+"loanNumber2: " + loanNumber2check + ".\n"
+				+"loanQuestion3: " + loanQuestion3Check + ".\n"
+				+"loanNumber3: " + loanNumber3check + ".\n"
+				+"feedbackQuestion: " + $('#feedbackQuestion').val() + ".\n"
+				+"feedback: " + feedbackCheck + ".\n"
+        +"end of note generator notes.";
+
+
+
+
+				//This is the logic for showing the form fields based on the value of the answers
+				switch(callType) {
+					case "Sales":
+					$(".platformForm").show();
+          $(".locationForm").hide();
+          $(".nonProdIssueForm").hide();
+          $(".shortDescriptionForm").hide();
+          $("#shortTextButton").hide();
+					$("#resetButton").hide();
+          $("#genesisOutlineButton").hide();
+					break;
+					case "Mortgage Ops Call":
+          $(".locationForm").show();
+          $(".platformForm").hide();
+          $(".nonProdIssueForm").hide();
+          $(".shortDescriptionForm").hide();
+          $("#shortTextButton").hide();
+					$("#resetButton").hide();
+          $("#genesisOutlineButton").hide();
+					break;
+					case "Non Prod or Transferred":
+					$(".platformForm").hide();
+          $(".locationForm").hide();
+          $(".shortDescriptionForm").hide();
+          $("#shortTextButton").hide();
+					$("#resetButton").hide();
+          $(".nonProdIssueForm").show();
+          $("#genesisOutlineButton").hide();
+					break;
+            case "NON-HE Genesis Tickets":
+					$(".platformForm").hide();
+          $(".locationForm").hide();
+          $(".nonProdIssueForm").hide(); 
+          $(".shortDescriptionForm").show();
+          $("#shortTextButton").show();
+					$("#resetButton").show();
+          $("#genesisOutlineButton").show();
+					break;
+            case "HE TICKETS":
+					$(".platformForm").hide();
+          $(".locationForm").hide();
+          $(".nonProdIssueForm").hide();
+          $(".shortDescriptionForm").show();
+          $("#shortTextButton").show();
+					$("#resetButton").show();
+          $("#genesisOutlineButton").show();
+					break;
+            case "CROSS SELL REFERRAL DISCREPANCY TICKETS":
+					$(".platformForm").hide();
+          $(".locationForm").hide();
+          $(".nonProdIssueForm").hide();
+          $(".shortDescriptionForm").show();
+          $("#shortTextButton").show();
+					$("#resetButton").show();
+          $("#genesisOutlineButton").show();
+					break;
+				}
+        
+        switch(nonProdIssue) {
+					case "Yes":
+					$(".nonProdIssueQuestionForm").show(); 
+					break;
+					case "No":
+          $(".feedbackQuestionForm").show(); 
+					break;
+				}
+        
+        switch(nonProdIssueQuestion) {
+					case "Yes":
+					$(".loanNumberForm").show();
+          $(".feedbackQuestionForm").show();
+					break;
+					case "No":
+          $(".feedbackQuestionForm").show(); 
+					break;
+				}
+        
+        switch(locationQuestion) {
+					case "Downers Grove":
+          $(".functionForm").show();
+					break;
+					case "Jacksonville":
+          $(".functionForm").show();
+					break;
+					case "Pittsburgh":
+					$(".functionForm").show();
+					break;
+				}
+        
+        switch(functionSelect) {
+					case "Pre-Underwriter":
+					$(".issuePreUnderwriterForm").show();
+          $(".issueUnderwriterForm").hide();
+          $(".issueProcessorForm").hide();
+          $(".issueCollaterialReviewForm").hide();
+          $(".issueCloserForm").hide();
+          $(".issueFunderForm").hide();
+					break;
+					case "Underwriter":
+          $(".issuePreUnderwriterForm").hide();
+          $(".issueUnderwriterForm").show();
+          $(".issueProcessorForm").hide();
+          $(".issueCollaterialReviewForm").hide();
+          $(".issueCloserForm").hide();
+          $(".issueFunderForm").hide();
+					break;
+					case "Processor":
+          $(".issuePreUnderwriterForm").hide();
+          $(".issueUnderwriterForm").hide();
+          $(".issueProcessorForm").show();
+          $(".issueCollaterialReviewForm").hide();
+          $(".issueCloserForm").hide();
+          $(".issueFunderForm").hide();
+					break;
+          case "Collaterial Reviewer":
+          $(".issuePreUnderwriterForm").hide();
+          $(".issueUnderwriterForm").hide();
+          $(".issueProcessorForm").hide();
+          $(".issueCollaterialReviewForm").show();
+          $(".issueCloserForm").hide();
+          $(".issueFunderForm").hide();
+					break;
+					case "Closer":
+          $(".issuePreUnderwriterForm").hide();
+          $(".issueUnderwriterForm").hide();
+          $(".issueProcessorForm").hide();
+          $(".issueCollaterialReviewForm").hide();
+          $(".issueCloserForm").show();
+          $(".issueFunderForm").hide();
+					break;
+					case "Funder":
+          $(".issuePreUnderwriterForm").hide();
+          $(".issueUnderwriterForm").hide();
+          $(".issueProcessorForm").hide();
+          $(".issueCollaterialReviewForm").hide();
+          $(".issueCloserForm").hide();
+          $(".issueFunderForm").show();
+					break;
+				}
+
+				switch(platform) {
+					case "Empower":
+					$(".issueOriginatorForm").show();
+					break;
+					case "Genesis":
+					$(".issueOriginatorForm").show();
+					break;
+					case "Sales Edge":
+					$(".issueOriginatorForm").show();
+					break;
+					case "Multiple":
+					$(".issueOriginatorForm").show();
+					break;
+				}
+
+				switch(issueOriginator) {
+					case "Login issue for Genesis":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for Sales Edge":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue Other":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Sales Edge Lead not showing in Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Genesis or Sales Edge issue not listed above":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "AUS issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Fee issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Credit report issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Document issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Issue with ordering Title, Appraisal":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Mortgage Product Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "20 Data Points":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+          case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+          case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+          case "Loan Conditions Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+          case "Unable to reconcile the CD":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+          case "Issue with Wire":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+        switch(issuePreUnderwriter) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Loan Conditions Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+        switch(issueUnderwriter) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Loan Conditions Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+        switch(issueProcessor) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Loan Conditions Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+        switch(issueCollaterialReview) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Loan Conditions Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+          switch(issueCloser) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to reconcile the CD":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+        
+          switch(issueFunder) {
+					case "Login issue for Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+					case "Login issue for other than Empower":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "AUS issue (Desktop Underwriter, Loan Prospector, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Compliance Ease issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "MI or MIP issue (Mortgage Insurance)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Escrow Issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Fee issue (Including Smart GFE) but not related to Escrow and MI":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Credit report issue (unable to pull, receive, etc)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Document issue (unable to send or missing information, also including Docutech related problems)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Assigning Borrowers":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with ordering or working a Title, Appraisal, Flood, Core Logic":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Pricing or Rate Lock issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Mortgage Product Issue (including Loan Product Advisor)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with any of the 20 application data points (aka URLA)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Unable to send to proper Destination":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Government Loan (FHA, VA, etc) issue not related to any other issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Procedure Question or Problem":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Empower system issue (locking up, not saving, timing out, kicking out)":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Issue with Wire":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "Business Card Directory issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+            case "OFAC issue":
+					$(".shortDescriptionForm").show();
+					$(".procedureQuestionForm").show();
+					break;
+				}
+
+				switch(procedureQuestion) {
+					case "Yes":
+					$(".procedureNumberForm").show();
+					$(".moveOnForm").show();
+					break;
+					case "No":
+					$(".procedureNumberForm").hide();
+					$(".moveOnForm").show();
+					break;
+				}
+
+				switch(moveOn) {
+					case "Yes":
+					$(".loanQuestionForm").show();
+					break;
+					case "No":
+					$(".loanQuestionForm").show();
+					break;
+				}
+
+				switch(loanQuestion) {
+					case "Yes":
+					$(".loanNumberForm").show();
+					$(".loanQuestionForm2").show();
+					$(".feedbackQuestionForm").hide();
+					break;
+					case "No":
+					$(".loanNumberForm").hide();
+					$(".loanQuestionForm2").hide();
+					$(".feedbackQuestionForm").show();
+					break;
+				}
+
+				switch(loanQuestion2) {
+					case "Yes":
+					$(".loanNumberForm2").show();
+					$(".loanQuestionForm3").show();
+					$(".feedbackQuestionForm").hide();
+					break;
+					case "No":
+					$(".loanNumberForm2").hide();
+					$(".loanQuestionForm3").hide();
+					$(".feedbackQuestionForm").show();
+					break;
+				}
+
+				switch(loanQuestion3) {
+					case "Yes":
+					$(".loanNumberForm3").show();
+					$(".feedbackQuestionForm").show();
+					break;
+					case "No":
+					$(".loanNumberForm3").hide();
+					$(".feedbackQuestionForm").show();
+					break;
+				}
+
+				switch(feedbackQuestion) {
+					case "Yes":
+					$(".feedbackForm").show();
+					$("#shortTextButton").show();
+					$("#descriptionButton").show();
+					$("#resetButton").show();
+					break;
+					case "No":
+					$(".feedbackForm").hide();
+					$("#shortTextButton").show();
+					$("#descriptionButton").show();
+					$("#resetButton").show();
+					break;
+				}
+
+				//start button code for short text
+				$("#shortTextButton").off().on("click", function() {
+					//This is what we are going to actually print
+          var shortTextPrint;
+          //if genesis ticket change short description
+          if(callTypeCheck == "NON-HE Genesis Tickets"){
+            shortTextPrint = "GEN: " + $('#shortDescription').val();
+          }else if(callTypeCheck == "HE TICKETS"){
+              shortTextPrint = "GEN-HE: " + $('#shortDescription').val();      
+                    }else if(callTypeCheck == "CROSS SELL REFERRAL DISCREPANCY TICKETS"){
+            shortTextPrint = "GEN: " + $('#shortDescription').val();
+          } else{
+            shortTextPrint = "HLHD - Empower - Mortgage - " + $('#shortDescription').val() + " " + $('#loanNumber').val();
+          }
+					//write to the text box -- show the text box so we can select the text -- after we copy the code, hide the text box again
+					$("#shortTextBlock").html(shortTextPrint);
+					$("#shortTextBlock").show();
+					var selectText = document.getElementById("shortTextBlock");
+					selectText.select();
+					copyToClipBoard();
+					$("#shortTextBlock").hide();
+					//end button code for short text
+				});
+        
+        //start button code for genesis ticket outline text
+				$("#genesisOutlineButton").off().on("click", function() {
+          var genNote;
+          var nonHE = "DETAILED DESCRIPTION: \n " +
+              "CONTACT/PROSPECT NAME: \n " +
+              "CONTACT ID (TIN): \n " + 
+              "CONTACT PHONE#: \n " +
+"CONTACT STREET ADDRESS: \n " +
+"CONTACT ZIP CODE:152031648 \n " +
+"OPPORTUNITY TYPE(i.e. Web Lead, Program Lead, Referral): \n " +
+"ROW ID (Menu > About Record) (include screen shot): \n " +
+"APPLET/VIEW the user is on: \n " +
+"PATH TAKEN: \n " + 
+"ERROR MESSAGE(if applicable): \n " +
+"TROUBLESHOOTING PERFORMED: \n " ;
+          
+          var HE = "DETAILED DESCRIPTION: \n " +
+"APPLICATION # (ID if # not assigned): \n " +
+"APPLICATION TYPE (NFSC, Blank Channel): \n " +
+"PRODUCT (HEIL, CHELOC): \n " +
+"VIEW/SCREEN NAME: \n " +
+"APPLICATION STATUS: \n " +
+"ERROR MESSAGE (if applicable): \n " +
+"TROUBLESHOOTING PERFORMED: \n " ;
+          
+          var crossSell = "DETAILED DESCRIPTION: \n " +
+              "REFERRAL CREATION DATE: \n " +
+"DATE OF SALE (i.e. account opened, loan booked): \n " +
+"TRANSACTION DATE (i.e. deposit date): \n " +
+"CUSTOMER NAME (first and last name or full name of business): \n " +
+"CUSTOMER/BUSINESS TIN: \n " +
+"CUSTOMER PHONE: \n " +
+"PRODUCT/SERVICE: \n " +  
+"NAME OF BRANCH/SALES PERSON THAT OPENED ACCOUNT: \n " +
+"ORIGINAL AWARD VALUE: \n " ;
+          
+          
+          if(callTypeCheck == "NON-HE Genesis Tickets"){
+            genNote = "CallType: " + callType + ".\n" + nonHE + "end of note generator notes.";
+          }else if(callTypeCheck == "HE TICKETS"){
+              genNote = "CallType: " + callType + ".\n" + HE + "end of note generator notes.";    
+                    }else if(callTypeCheck == "CROSS SELL REFERRAL DISCREPANCY TICKETS"){
+            genNote = "CallType: " + callType + ".\n" + crossSell + "end of note generator notes.";
+          }
+					
+					//write to the text box -- show the text box so we can select the text -- after we copy the code, hide the text box again
+					$("#descriptionBlock").html(genNote);
+					$("#descriptionBlock").show();
+					var selectText = document.getElementById("descriptionBlock");
+					selectText.select();
+					copyToClipBoard();
+					$("#descriptionBlock").hide();
+					//end button code for description text
+				});
+
+
+				//start button code for description text
+				$("#descriptionButton").off().on("click", function() {
+					//we are going to print note (passing the varible created earlier)
+					//write to the text box -- show the text box so we can select the text -- after we copy the code, hide the text box again
+					$("#descriptionBlock").html(note);
+					$("#descriptionBlock").show();
+					var selectText = document.getElementById("descriptionBlock");
+					selectText.select();
+					copyToClipBoard();
+					$("#descriptionBlock").hide();
+					//end button code for description text
+				});
+
+				//start button code for reset
+				$("#resetButton").off().on("click", function() {
+					//reset the form and hide the fields
+					document.getElementById("noteGen").reset();
+					$(".form-control").css("border", "2px solid red");
+					hideAll();
+					//end button code for reset
+				});
+        
+        //start button code for reset button on top of page
+				$("#resetButtonTop").off().on("click", function() {
+					//reset the form and hide the fields
+					document.getElementById("noteGen").reset();
+					$(".form-control").css("border", "2px solid red");
+					hideAll();
+					//end button code for reset
+				});
+
+			});
+
+			//start button code for instructions pop up at start
+			$(".back-secondary").on("click", function() {
+				$(".back-secondary").hide();
+			});
+			//end button code for instructions pop up at start
+
+			//start code for instructions pop up off question mark button
+			$(".help").on("click", function() {
+				$(".back-secondary").show();
+			});
+			//end question mark code
+
+			//calling other functions
+			forceProcedure();
+			validate();
+
+			//end document ready function
+		});
+
+		//this function foces the correct input for procedure numbers
+		function forceProcedure() {
+  $("#procedureNumber").focusout(function() {
+    var check = $(this).val();
+    if (check.indexOf("_") > -1) check = check.split("_").join(""); // remove _ if it has _
+    if (check.length > 0) {
+      check = check.match(new RegExp(".{1,2}", "g")).join("_");
+      if (check.length > 8)
+        check = check.slice(0, 8) + check.slice(9); // if ends in 3 numbers, remove last _
+      else check = check.slice(0, 6) + "0" + check.slice(6); // if ends in 2 numbers, add 0 before last two numbers
+    }
+
+    $(this).val(check);
+  });
+}
+
+		//hide all of the fields but the initial question
+		function hideAll() {
+      $("#genesisOutlineButton").hide();
+			$(".platformForm").hide();
+      $(".nonProdIssueForm").hide();
+      $(".nonProdIssueQuestionForm").hide();
+      $(".locationForm").hide();
+      $(".functionForm").hide();
+			$(".issueOriginatorForm").hide();
+      $(".issuePreUnderwriterForm").hide();
+      $(".issueUnderwriterForm").hide();
+      $(".issueProcessorForm").hide();
+      $(".issueCollaterialReviewForm").hide();
+      $(".issueCloserForm").hide();
+      $(".issueFunderForm").hide();
+			$(".shortDescriptionForm").hide();
+			$(".procedureQuestionForm").hide();
+			$(".procedureNumberForm").hide();
+			$(".moveOnForm").hide();
+			$(".loanQuestionForm").hide();
+			$(".loanNumberForm").hide();
+			$(".loanQuestionForm2").hide();
+			$(".loanNumberForm2").hide();
+			$(".loanQuestionForm3").hide();
+			$(".loanNumberForm3").hide();
+			$(".feedbackQuestionForm").hide();
+			$(".feedbackForm").hide();
+			$("#shortTextButton").hide();
+			$("#descriptionButton").hide();
+			$("#resetButton").hide();
+			$("#shortTextBlock").hide();
+			$("#success").hide();
+			$("#descriptionBlock").hide();
+		}
+
+		//After they input a value remove the red border
+		function validate() {
+			$("#noteGen :input").change(function() {
+				$(this).css("border", "1px solid grey");
+			});
+      
+      $("#procedureNumber").focusout(function() {
+				$(this).css("border", "1px solid grey");
+			});
+		}
+
+		//copy text to the clipboard
+		function copyToClipBoard() {
+			try {
+				var successful = document.execCommand('copy');
+				//if it works show our success popup
+				var msg = successful ? 'successful' : 'unsuccessful';
+				$('#success').fadeIn('normal', function () {
+					$(this).fadeOut('fast');
+				});
+				//if it doesn't copy print to dev console so we can see error there when testing
+			} catch (err) {
+				console.log('Oops, unable to copy');
+			}
+		}
+
+
+		</SCRIPT>
+
+		</html>
+  
+  
+
+</body>
+
+</html>
