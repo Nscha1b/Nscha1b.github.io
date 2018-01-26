@@ -689,7 +689,8 @@
 
 				$(document).delegate('#homeMin', 'click', function()
 				{
-					swap();
+					$("#times").removeClass("fa-times");
+					$("#bars").addClass("fa-bars");
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: 0
@@ -698,7 +699,8 @@
 
 				$(document).delegate('#aboutMin', 'click', function()
 				{
-					swap();
+					$("#times").removeClass("fa-times");
+					$("#bars").addClass("fa-bars");
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#aboutHead").offset().top
@@ -707,7 +709,8 @@
 
 				$(document).delegate('#projectsMin', 'click', function()
 				{
-					swap();
+					$("#times").removeClass("fa-times");
+					$("#bars").addClass("fa-bars");
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#projects").offset().top
@@ -716,7 +719,8 @@
 
 				$(document).delegate('#contactMin', 'click', function()
 				{
-					swap();
+					$("#times").removeClass("fa-times");
+					$("#bars").addClass("fa-bars");
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#contact").offset().top
@@ -730,8 +734,7 @@
 				$(".fa-bars").on("click", function(){
 					$("#menu").addClass("menu-active");
 					$("#times").addClass("fa-times");
-					$(".fa-bars").hide();
-					$(".fa-times").show();
+					$("#bars").removeClass("fa-bars");
 				});
 
 
@@ -740,13 +743,10 @@
 				{
 					$("#menu").removeClass("menu-active");
 					$("#times").removeClass("fa-times");
-					$(".fa-bars").show();
+					$("#bars").addClass("fa-bars");
 				});
 
-				function swap(){
-					$(".fa-times").hide();
-					$(".fa-bars").show();
-				}
+
 
 
 
