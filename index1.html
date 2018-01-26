@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="Nick Schafer" content="Nick Schafer">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Nick Schafer</title>
@@ -487,7 +487,7 @@
 
 
 			<section class="menu text-center" id="menu">
-				<i class="fa fa-times" aria-hidden="true"></i>
+				<i id="times" class="fa " aria-hidden="true"></i>
 				<nav>
 					<a id="homeMin" href="#">Home</a>
 					<a id="aboutMin" href="#">About me</a>
@@ -721,11 +721,21 @@
 
 				$(".fa-bars").on("click", function(){
 					$("#menu").addClass("menu-active");
+					$("#times").addClass("fa-times");
 				});
 
-				$(".fa-times").on("click", function(){
+
+
+				$(document).delegate('.fa-times', 'click', function()
+				{
 					$("#menu").removeClass("menu-active");
+					$("#times").removeClass("fa-times");	
 				});
+
+
+
+
+
 
 				(function($) {
 					var $window = $(window);
