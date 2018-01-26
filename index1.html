@@ -689,6 +689,7 @@
 
 				$(document).delegate('#homeMin', 'click', function()
 				{
+					swap();
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: 0
@@ -697,6 +698,7 @@
 
 				$(document).delegate('#aboutMin', 'click', function()
 				{
+					swap();
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#aboutHead").offset().top
@@ -705,6 +707,7 @@
 
 				$(document).delegate('#projectsMin', 'click', function()
 				{
+					swap();
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#projects").offset().top
@@ -713,6 +716,7 @@
 
 				$(document).delegate('#contactMin', 'click', function()
 				{
+					swap();
 					$("#menu").removeClass("menu-active");
 					$('html, body').animate({
 						scrollTop: $("#contact").offset().top
@@ -737,6 +741,11 @@
 					$("#times").removeClass("fa-times");
 					$(".fa-bars").show();
 				});
+
+				function swap(){
+					$(".fa-times").hide();
+					$(".fa-bars").show();
+				}
 
 
 
