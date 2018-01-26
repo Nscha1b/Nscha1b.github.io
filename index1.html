@@ -37,6 +37,10 @@
 		z-index: 10;
 	}
 
+	#times{
+		z-index: 3;
+	}
+
 	#profile-pic{
 		background-color: #DE5561;
 		box-shadow: 0 0 2px #111111;
@@ -134,7 +138,7 @@
 		left: 0;
 		bottom: 0;
 		transform: translate3d(0,0,0);
-		z-index: 10;
+		z-index: 80;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -722,6 +726,7 @@
 				$(".fa-bars").on("click", function(){
 					$("#menu").addClass("menu-active");
 					$("#times").addClass("fa-times");
+					$(".fa-bars").hide();
 				});
 
 
@@ -729,10 +734,9 @@
 				$(document).delegate('.fa-times', 'click', function()
 				{
 					$("#menu").removeClass("menu-active");
-					$("#times").removeClass("fa-times");	
+					$("#times").removeClass("fa-times");
+					$(".fa-bars").show();
 				});
-
-
 
 
 
