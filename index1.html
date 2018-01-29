@@ -73,11 +73,6 @@
 		line-height: 50px;
 		vertical-align: middle;
 		opacity: .7;
-		-webkit-transition: all .1s ease-in-out;
-	}
-
-	.iconSize:hover{
-		-webkit-transform: scale(1.1);
 	}
 	
 	a:hover {
@@ -268,15 +263,16 @@
 	.img-thumbnail {
 		height: 150px;
 		width: 150px;
-		-webkit-transition: all .1s ease-in-out;
-		background-color: #DE5561;
-
 	}
 
+	.bw{
+		     filter: gray; /* IE5+ */
+      -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+      -webkit-transition: all .8s ease-in-out;  
+	}
 
-	.img-thumbnail:hover {
+	.bw:hover {
 
-		-webkit-transform: scale(1.1);
 	}
 
 	textarea {
@@ -564,34 +560,34 @@
 
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="note-gen.html" target="_blank"> <img src="note-gen.jpg" id="note" class="bw img-thumbnail"> </a>
+					<a href="note-gen.html" target="_blank"> <img src="note-gen.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Note Generator</h3>
 				</div>
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="wikipediaviewer.html" target="_blank"> <img src="wikiapp.jpg" class="img-thumbnail"> </a>
+					<a href="wikipediaviewer.html" target="_blank"> <img src="wikiapp.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Wikipedia Viewer</h3>
 				</div>
 
 
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="tictac.html" target="_blank"> <img src="tictac.jpg" class="img-thumbnail"> </a>
+					<a href="tictac.html" target="_blank"> <img src="tictac.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Tic Tac Toe</h3>
 				</div>
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="twitchStreamer.html" target="_blank"> <img src="twitchViewer.jpg" class="img-thumbnail"> </a>
+					<a href="twitchStreamer.html" target="_blank"> <img src="twitchViewer.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Twitch Viewer</h3>
 				</div>
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="pomodoroTimer.html" target="_blank"> <img src="timer.jpg" class="img-thumbnail"> </a>
+					<a href="pomodoroTimer.html" target="_blank"> <img src="timer.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Pomodoro Timer</h3>
 				</div>
 
 				<div class="text-center col-sm-6 col-md-4 py-2">
-					<a href="weatherapp.html" target="_blank"> <img src="weatherapp.jpg" class="img-thumbnail"> </a>
+					<a href="weatherapp.html" target="_blank"> <img src="weatherapp.jpg" class="img-thumbnail bw"> </a>
 					<h3 class="py-3 jrText">Weather App</h3>
 				</div>
 
@@ -607,16 +603,16 @@
 
 			<div class="row animated fadeInRight social text-center pb-5">
 				<div class="col-12">
-					<a href="https://www.facebook.com/nickPschafer" target="_blank">
+					<a href="https://www.facebook.com/nickPschafer">
 						<i class="fa fa-facebook iconSize" aria-hidden="true"></i>
 					</a>
-					<a href="https://www.instagram.com/_nickschafer/" target="_blank">
+					<a href="https://www.instagram.com/_nickschafer/">
 						<i class="fa fa-instagram iconSize" aria-hidden="true"></i>
 					</a>
-					<a href="https://www.youtube.com/channel/UCh7CJxa7IhyRImqMlMUd7_A/feed?view_as=subscriber" target="_blank">
+					<a href="https://www.youtube.com/channel/UCh7CJxa7IhyRImqMlMUd7_A/feed?view_as=subscriber">
 						<i class="fa fa-youtube iconSize" aria-hidden="true"></i>
 					</a>
-					<a href="https://github.com/Nscha1b" target="_blank">
+					<a href="https://github.com/Nscha1b">
 						<i class="fa fa-github iconSize" aria-hidden="true"></i>
 					</a>
 				</div>
